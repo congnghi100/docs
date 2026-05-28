@@ -52,8 +52,18 @@
 <li style="padding-left: 15px; font-size: 0.9em;"><a href="#screen-5-man-hinh-danh-ba-to-chuc-contact-org-chart">Screen 5: Màn hình Danh bạ & Tổ chức (Contact & Org Chart)</a></li>
 <li style="padding-left: 15px; font-size: 0.9em;"><a href="#screen-6-man-hinh-tim-kiem-toan-cuc-global-search">Screen 6: Màn hình Tìm kiếm toàn cục (Global Search)</a></li>
 <li style="padding-left: 15px; font-size: 0.9em;"><a href="#screen-7-man-hinh-thong-tin-ca-nhan-cai-at-user-profile-settings">Screen 7: Màn hình Thông tin cá nhân & Cài đặt (User Profile & Settings)</a></li>
-<li style="padding-left: 15px; font-size: 0.9em;"><a href="#screen-8-man-hinh-dashboard-ban-lanh-ao-bod-dashboard-screen">Screen 8: Màn hình Dashboard Ban Lãnh Đạo (BOD Dashboard Screen)</a></li>
-<li style="padding-left: 15px; font-size: 0.9em;"><a href="#screen-9-bang-ieu-khien-quan-tri-audit-log-admin-panel">Screen 9: Bảng Điều Khiển Quản Trị & Audit Log (Admin Panel)</a></li>
+<li style="padding-left: 15px; font-size: 0.9em;"><a href="#screen-8-bang-ieu-khien-quan-tri-audit-log-admin-panel">Screen 8: Bảng Điều Khiển Quản Trị & Audit Log (Admin Panel)</a></li>
+<li style=""><a href="#3-tong-hop-cac-man-hinh-screens-overview">3. Tổng Hợp Các Màn Hình (Screens Overview)</a></li>
+<li style=""><a href="#4-edge-cases-truong-hop-ngoai-le-huong-xu-ly-ux">4. Edge Cases (Trường Hợp Ngoại Lệ & Hướng Xử Lý UX)</a></li>
+<li style=""><a href="#5-ghi-chu-them-cho-designer">5. Ghi Chú Thêm Cho Designer</a></li>
+<li style=""><a href="#3-tong-hop-cac-man-hinh-screens-overview">3. Tổng Hợp Các Màn Hình (Screens Overview)</a></li>
+<li style=""><a href="#4-edge-cases-truong-hop-ngoai-le-huong-xu-ly-ux">4. Edge Cases (Trường Hợp Ngoại Lệ & Hướng Xử Lý UX)</a></li>
+<li style=""><a href="#5-ghi-chu-them-cho-designer">5. Ghi Chú Thêm Cho Designer</a></li>
+<li style="padding-left: 15px; font-size: 0.9em;"><a href="#screen-9-man-hinh-thong-tin-ca-nhan-cai-at-user-profile-settings">Screen 9: Màn hình Thông tin cá nhân & Cài đặt (User Profile & Settings)</a></li>
+<li style="padding-left: 15px; font-size: 0.9em;"><a href="#screen-10-bang-ieu-khien-quan-tri-audit-log-admin-panel">Screen 10: Bảng Điều Khiển Quản Trị & Audit Log (Admin Panel)</a></li>
+<li style=""><a href="#3-tong-hop-cac-man-hinh-screens-overview">3. Tổng Hợp Các Màn Hình (Screens Overview)</a></li>
+<li style=""><a href="#4-edge-cases-truong-hop-ngoai-le-huong-xu-ly-ux">4. Edge Cases (Trường Hợp Ngoại Lệ & Hướng Xử Lý UX)</a></li>
+<li style=""><a href="#5-ghi-chu-them-cho-designer">5. Ghi Chú Thêm Cho Designer</a></li>
 <li style=""><a href="#3-tong-hop-cac-man-hinh-screens-overview">3. Tổng Hợp Các Màn Hình (Screens Overview)</a></li>
 <li style=""><a href="#4-edge-cases-truong-hop-ngoai-le-huong-xu-ly-ux">4. Edge Cases (Trường Hợp Ngoại Lệ & Hướng Xử Lý UX)</a></li>
 <li style=""><a href="#5-ghi-chu-them-cho-designer">5. Ghi Chú Thêm Cho Designer</a></li>
@@ -512,87 +522,7 @@
 </tr>
 </tbody></table>
 <hr>
-<h3 id="screen-8-man-hinh-dashboard-ban-lanh-ao-bod-dashboard-screen">Screen 8: Màn hình Dashboard Ban Lãnh Đạo (BOD Dashboard Screen)</h3>
-<p><strong>Mục đích:</strong> Cung cấp thông tin tổng hợp trực quan và hỗ trợ AI ra quyết định nhanh cho ban lãnh đạo.</p>
-<h4 id="a-phac-hoa-giao-dien-wireframe-visual-sequence">A. Phác họa Giao diện (Wireframe - Visual Sequence)</h4>
-<details>
-<summary>📱 Dashboard điều hành <code>bod-dashboard</code></summary><p><strong>Mô tả:</strong> Màn hình của lãnh đạo với thẻ KPIs tài chính, hộp thoại cảnh báo chủ động và cổng giao việc nhanh bằng AI.</p>
-<pre><code class="language-text">┌─────────────────────────────────────────┐
-│        Báo cáo điều hành            [⚙️]│
-│        Cập nhật: 10:00 (hôm nay)        │
-├─────────────────────────────────────────┤
-│  KPIs:                                  │
-│  ┌─────────────────┐ ┌────────────────n│
-│  │ Doanh thu tháng │ │ Nhân sự mới    │ │
-│  │ 2.4 Tỷ (+12%)   │ │ 15 người       │ │
-│  └─────────────────┘ └────────────────┘ │
-│                                         │
-│  ⚠️ Cảnh báo: Ngân sách Dự án X vượt 15%│
-├─────────────────────────────────────────┤
-│ 🤖 Trợ lý số liệu BOD                   │
-│ ┌─────────────────────────────────────┐ │
-│ │ Hãy hỏi trợ lý về số liệu ERP...   │ │
-│ └─────────────────────────────────────┘ │
-│ ┌─────────────────────────────────────┐ │
-│ │ [➕ Giao việc nhanh cho cấp dưới]   │ │
-│ └─────────────────────────────────────┘ │
-└─────────────────────────────────────────┘
-</code></pre>
-</details><h4 id="b-cau-truc-layout-components-anatomy">B. Cấu trúc Layout & Components (Anatomy)</h4>
-<ul>
-<li><strong>Header:</strong> Tiêu đề &quot;Báo cáo điều hành&quot; + Thời gian cập nhật gần nhất + Icon cấu hình cảnh báo.</li>
-<li><strong>Body/Main Content:</strong><ul>
-<li>Khối biểu đồ KPI tóm tắt (Doanh thu, Nhân sự, Tiến độ dự án trọng điểm).</li>
-<li>Khối Cảnh báo sớm (Anomaly Alert): Các thông số vượt ngưỡng (Ví dụ: <em>&quot;Dự án X chậm tiến độ 3 ngày&quot;</em>).</li>
-<li>Ô chat tương tác trực tiếp với Trợ lý AI của lãnh đạo.</li>
-</ul>
-</li>
-<li><strong>Footer:</strong> Bottom navigation.</li>
-</ul>
-<h4 id="c-component-data">C. Component & Data</h4>
-<table>
-<thead>
-<tr>
-<th>Component</th>
-<th>Loại</th>
-<th>Mô tả dữ liệu / Logic</th>
-<th>Ràng buộc (Validation)</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Biểu đồ KPI</td>
-<td>Chart Widget</td>
-<td>Hiển thị dạng đường, cột hoặc tròn. Cho phép click để xem chi tiết theo tháng/tuần.</td>
-<td>Dữ liệu đồng bộ tự động mỗi 1 giờ.</td>
-</tr>
-<tr>
-<td>Khung Chat AI Lãnh đạo</td>
-<td>Text Input</td>
-<td>Lãnh đạo nhập câu hỏi tự nhiên về số liệu (Ví dụ: <em>&quot;So sánh chi phí dự án A và B&quot;</em>). AI phản hồi bằng bảng số liệu và biểu đồ trực quan.</td>
-<td>Phân quyền nghiêm ngặt chỉ tài khoản thuộc nhóm BOD mới truy cập được.</td>
-</tr>
-<tr>
-<td>Nút &quot;Giao việc nhanh&quot;</td>
-<td>Action CTA</td>
-<td>Xuất hiện bên cạnh câu trả lời của AI hoặc thẻ KPI lỗi. Click để tạo nhanh task giao xuống cấp dưới.</td>
-<td>Bắt buộc chọn Người chịu trách nhiệm (Assignee) và Hạn chót (Deadline).</td>
-</tr>
-</tbody></table>
-<h4 id="d-trang-thai-giao-dien-ui-states">D. Trạng thái giao diện (UI States)</h4>
-<ul>
-<li>⚪ <strong>Empty State:</strong> Chưa cấu hình chỉ số KPI nào. Hiển thị text gợi ý: <em>&quot;Vui lòng chọn các chỉ số cốt lõi bạn muốn theo dõi hàng ngày.&quot;</em></li>
-<li>🔄 <strong>Loading State:</strong> Hiển thị hiệu ứng shimmer cho các biểu đồ trong lúc tính toán số liệu.</li>
-<li>🔴 <strong>Error State:</strong> Lỗi tải dữ liệu ERP: Hiển thị icon cảnh báo lỗi kèm nút <em>&quot;Tải lại dữ liệu&quot;</em>.</li>
-<li>🟢 <strong>Success State:</strong> Quyết định giao việc được tạo thành công, tự động gửi thông báo xuống ứng dụng của nhân viên chịu trách nhiệm.</li>
-</ul>
-<h4 id="e-copywriting-microcopy">E. Copywriting (Microcopy)</h4>
-<ul>
-<li>Title: <code>Dashboard Điều Hành</code></li>
-<li>AI Assistant Input: <code>Hỏi trợ lý số liệu doanh nghiệp...</code></li>
-<li>Alert Text: <code>⚠️ Cảnh báo: Ngân sách dự án Y đã vượt 15% hạn mức.</code></li>
-</ul>
-<hr>
-<h3 id="screen-9-bang-ieu-khien-quan-tri-audit-log-admin-panel">Screen 9: Bảng Điều Khiển Quản Trị & Audit Log (Admin Panel)</h3>
+<h3 id="screen-8-bang-ieu-khien-quan-tri-audit-log-admin-panel">Screen 8: Bảng Điều Khiển Quản Trị & Audit Log (Admin Panel)</h3>
 <p><strong>Mục đích:</strong> Đảm bảo tính kiểm soát, tuân thủ chính sách và bảo mật dữ liệu doanh nghiệp (Đặc thù nội bộ).</p>
 <h4 id="a-phac-hoa-giao-dien-wireframe-visual-sequence">A. Phác họa Giao diện (Wireframe - Visual Sequence)</h4>
 <details>
@@ -1161,6 +1091,996 @@
 </tr>
 </tbody></table>
 <hr>
+<h3 id="screen-10-bang-ieu-khien-quan-tri-audit-log-admin-panel">Screen 10: Bảng Điều Khiển Quản Trị & Audit Log (Admin Panel)</h3>
+<p><strong>Mục đích:</strong> Đảm bảo tính kiểm soát, tuân thủ chính sách và bảo mật dữ liệu doanh nghiệp (Đặc thù nội bộ).</p>
+<h4 id="a-phac-hoa-giao-dien-wireframe-visual-sequence">A. Phác họa Giao diện (Wireframe - Visual Sequence)</h4>
+<details>
+<summary>🖥️ Bảng quản trị <code>admin-panel</code></summary><p><strong>Mô tả:</strong> Bản thiết kế giao diện rộng (Desktop/Web) cho Admin theo dõi danh sách Audit Log, lọc hành động, địa chỉ IP và trạng thái phiên làm việc.</p>
+<pre><code class="language-text">┌─────────────────────────────────────────┐
+│ Bảng điều khiển Admin - Audit Log [Web] │
+├─────────────────────────────────────────┤
+│ [👤 User] [👥 Groups] [📋 Logs] [⚙️ Config]│
+├─────────────────────────────────────────┤
+│ Bộ lọc: [Hành động v] [Nhân viên v]     │
+├─────────────────────────────────────────┤
+│ Thời gian | Nhân viên | Hành động | IP  │
+├───────────┼───────────┼───────────┼─────┤
+│ 10:14:15  │ Admin     │ Lock user │ 1.1 │
+├───────────┼───────────┼───────────┼─────┤
+│ 10:12:00  │ N.V. A    │ Login     │ 2.3 │
+├───────────┼───────────┼───────────┼─────┤
+│ 09:45:10  │ L.T. B    │ Edit msg  │ 4.5 │
+└───────────┴───────────┴───────────┴─────┘
+</code></pre>
+</details><h4 id="b-cau-truc-layout-components-anatomy">B. Cấu trúc Layout & Components (Anatomy)</h4>
+<ul>
+<li><strong>Side Navigation (Bản Web/Desktop):</strong> Người dùng | Nhóm &amp; Kênh | Quyền hạn &amp; Phân vai (RBAC) | Nhật ký hệ thống (Audit Log) | Cấu hình bảo mật.</li>
+<li><strong>Body/Main Content:</strong><ul>
+<li>Bảng hiển thị danh sách chi tiết (ví dụ: Danh sách Audit Log).</li>
+<li>Các bộ lọc nâng cao (Tìm theo thời gian, theo hành động: Gửi/Xóa/Sửa/Đăng nhập, theo nhân viên).</li>
+<li>Khối thông tin chi tiết của hành động được chọn (Thiết bị, IP, tọa độ, hành động cụ thể).</li>
+</ul>
+</li>
+<li><strong>Header/Footer:</strong> Tên phiên quản trị, nút Đăng xuất an toàn.</li>
+</ul>
+<h4 id="c-component-data">C. Component & Data</h4>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Loại</th>
+<th>Mô tả dữ liệu / Logic</th>
+<th>Ràng buộc (Validation)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Bảng dữ liệu log</td>
+<td>Data Table</td>
+<td>Liệt kê các bản ghi lịch sử tương tác. Không cho phép sửa hay xóa bản ghi log dưới bất kỳ hình thức nào.</td>
+<td>Sắp xếp giảm dần theo thời gian (mới nhất lên đầu).</td>
+</tr>
+<tr>
+<td>Công cụ Lọc dữ liệu</td>
+<td>Filter Group</td>
+<td>Lọc log theo Loại hành động, Người thực hiện, Khoảng thời gian.</td>
+<td>Thời gian lọc tối đa 90 ngày mỗi lượt để tối ưu hiệu năng.</td>
+</tr>
+<tr>
+<td>Nút &quot;Khóa tài khoản&quot;</td>
+<td>Secondary CTA</td>
+<td>Cho phép Admin vô hiệu hóa tài khoản nhân viên ngay lập tức (khi nghỉ việc hoặc nghi ngờ lộ thông tin).</td>
+<td>Yêu cầu Admin xác nhận mật khẩu trước khi khóa.</td>
+</tr>
+</tbody></table>
+<h4 id="d-trang-thai-giao-dien-ui-states">D. Trạng thái giao diện (UI States)</h4>
+<ul>
+<li>⚪ <strong>Empty State:</strong> Kết quả lọc không có bản ghi nào phù hợp. Hiển thị text: <em>&quot;Không tìm thấy nhật ký tương ứng với bộ lọc.&quot;</em></li>
+<li>🔄 <strong>Loading State:</strong> Hàng đợi tải dữ liệu lớn hiển thị thanh tiến trình (progress bar).</li>
+<li>🔴 <strong>Error State:</strong> Lỗi truy vấn dữ liệu log: Hiển thị thông báo đỏ ở góc: <em>&quot;Lỗi kết nối cơ sở dữ liệu nhật ký. Vui lòng kiểm tra lại cấu hình.&quot;</em></li>
+<li>🟢 <strong>Success State:</strong> Vô hiệu hóa tài khoản thành công, hệ thống lập tức ngắt toàn bộ phiên kết nối (WebSocket) đang hoạt động của tài khoản đó.</li>
+</ul>
+<h4 id="e-copywriting-microcopy">E. Copywriting (Microcopy)</h4>
+<ul>
+<li>Table Columns: <code>Thời gian</code> | <code>Nhân viên</code> | <code>Hành động</code> | <code>Thiết bị</code> | <code>IP</code></li>
+<li>Notification: <code>Tài khoản [Tên] đã bị khóa thành công và đăng xuất khỏi toàn bộ thiết bị.</code></li>
+</ul>
+<hr>
+<h2 id="3-tong-hop-cac-man-hinh-screens-overview">3. Tổng Hợp Các Màn Hình (Screens Overview)</h2>
+<p>Bảng tổng hợp nhanh các màn hình đã thiết kế chi tiết ở trên để theo dõi trạng thái và sự liên kết:</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Slug</th>
+<th>Status</th>
+<th>Used by (UC / FR)</th>
+<th>Figma</th>
+<th>HTML prototype</th>
+<th>Updated</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><a href="#screen-1-man-hinh-dang-nhap-xac-thuc-otp-authentication-screen">auth-login</a></td>
+<td>draft</td>
+<td>uc-login-email</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#screen-2-man-hinh-danh-sach-hoi-thoai-chat-list-screen---home">chat-list</a></td>
+<td>draft</td>
+<td>uc-chat-navigation</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#screen-3-man-hinh-chi-tiet-chat-1-1-nhom-ai-chat-screen">chat-detail</a></td>
+<td>draft</td>
+<td>uc-chat-messaging</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="#screen-4-man-hinh-quan-ly-nhom--phan-quyen-group-settings--admin">group-settings</a></td>
+<td>draft</td>
+<td>uc-group-admin</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="#screen-5-man-hinh-danh-ba--to-chuc-contact--org-chart">contact-directory</a></td>
+<td>draft</td>
+<td>uc-contact-directory</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="#screen-6-man-hinh-tim-kiem-toan-cuc-global-search">search-results</a></td>
+<td>draft</td>
+<td>uc-global-search</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="#screen-7-man-hinh-thong-tin-ca-nhan--cai-dat-user-profile--settings">user-profile</a></td>
+<td>draft</td>
+<td>uc-profile-settings</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="#screen-8-man-hinh-dashboard-ban-lanh-dao-bod-dashboard-screen">bod-dashboard</a></td>
+<td>draft</td>
+<td>uc-bod-decide</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="#screen-9-bang-dieu-khien-quan-tri-audit-log-admin-panel">admin-panel</a></td>
+<td>draft</td>
+<td>uc-admin-compliance</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#screen-2-man-hinh-danh-sach-hoi-thoai-chat-list-screen---home">chat-list</a></td>
+<td>draft</td>
+<td>uc-chat-navigation / FR-8.1, FR-8.2, FR-8.5, FR-16.12</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#screen-3-man-hinh-chi-tiet-chat-1-1-nhom-ai-chat-screen">chat-detail</a></td>
+<td>draft</td>
+<td>uc-chat-messaging, uc-ai-helper / FR-2, FR-5, FR-11.1..11.4</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="#screen-4-man-hinh-quan-ly-nhom--phan-quyen-group-settings--admin">group-settings</a></td>
+<td>draft</td>
+<td>uc-group-admin</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="#screen-5-man-hinh-danh-ba--to-chuc-contact--org-chart">contact-directory</a></td>
+<td>draft</td>
+<td>uc-contact-directory</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="#screen-6-man-hinh-tim-kiem-toan-cuc-global-search">search-results</a></td>
+<td>draft</td>
+<td>uc-global-search</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="#screen-7-man-hinh-phe-duyet-quy-trinh-workflow-approval-screen">workflow-approval</a></td>
+<td>draft</td>
+<td>uc-workflow-approval / FR-14.1, FR-14.2, FR-14.4</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="#screen-8-man-hinh-tro-ly-ai--prompt-hub-ai-hub">ai-hub</a></td>
+<td>draft</td>
+<td>uc-ai-hub</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="#screen-9-man-hinh-thong-tin-ca-nhan--cai-dat-user-profile--settings">user-profile</a></td>
+<td>draft</td>
+<td>uc-profile-settings</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="#screen-10-man-hinh-dashboard-ban-lanh-dao-bod-dashboard-screen">bod-dashboard</a></td>
+<td>draft</td>
+<td>uc-bod-decide / FR-15.1..15.4, FR-15.14</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="#screen-11-bang-dieu-khien-quan-tri-audit-log-admin-panel">admin-panel</a></td>
+<td>draft</td>
+<td>uc-admin-compliance / FR-9.1..9.3, FR-9.6</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#screen-2-man-hinh-danh-sach-hoi-thoai-chat-list-screen---home">chat-list</a></td>
+<td>draft</td>
+<td>uc-chat-navigation / FR-8.1, FR-8.2, FR-8.5, FR-16.12</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#screen-3-man-hinh-chi-tiet-chat-1-1-nhom-ai-chat-screen">chat-detail</a></td>
+<td>draft</td>
+<td>uc-chat-messaging, uc-ai-helper / FR-2, FR-5, FR-11.1..11.4</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="#screen-4-man-hinh-phe-duyet-quy-trinh-workflow-approval-screen">workflow-approval</a></td>
+<td>draft</td>
+<td>uc-workflow-approval / FR-14.1, FR-14.2, FR-14.4</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="#screen-5-man-hinh-dashboard-ban-lanh-dao-bod-dashboard-screen">bod-dashboard</a></td>
+<td>draft</td>
+<td>uc-bod-decide / FR-15.1..15.4, FR-15.14</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="#screen-6-bang-dieu-khien-quan-tri-audit-log-admin-panel">admin-panel</a></td>
+<td>draft</td>
+<td>uc-admin-compliance / FR-9.1..9.3, FR-9.6</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="#screen-7-man-hinh-thong-tin-ca-nhan--cai-dat-user-profile--settings">user-profile</a></td>
+<td>draft</td>
+<td>uc-profile-settings</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="#screen-8-man-hinh-quan-ly-nhom--phan-quyen-group-settings--admin">group-settings</a></td>
+<td>draft</td>
+<td>uc-group-admin</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="#screen-9-man-hinh-danh-ba--to-chuc-contact--org-chart">contact-directory</a></td>
+<td>draft</td>
+<td>uc-contact-directory</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="#screen-10-man-hinh-tim-kiem-toan-cuc-global-search">search-results</a></td>
+<td>draft</td>
+<td>uc-global-search</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="#screen-11-man-hinh-tro-ly-ai--prompt-hub-ai-hub">ai-hub</a></td>
+<td>draft</td>
+<td>uc-ai-hub</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="4-edge-cases-truong-hop-ngoai-le-huong-xu-ly-ux">4. Edge Cases (Trường Hợp Ngoại Lệ & Hướng Xử Lý UX)</h2>
+<ul>
+<li><strong>Trường hợp 1: Tin nhắn chat chứa thông tin nhạy cảm hoặc vi phạm chính sách bảo mật công ty (ví dụ: chia sẻ mật khẩu, mã nguồn).</strong><ul>
+<li><strong>Hướng xử lý UX:</strong> Hệ thống AI quét ngầm realtime (theo chính sách DLP của doanh nghiệp). Nếu phát hiện vi phạm, tin nhắn sẽ bị ẩn đi kèm thông báo cho người gửi: <em>&quot;Tin nhắn bị ẩn do vi phạm chính sách bảo mật thông tin doanh nghiệp. Hành động đã được ghi vào nhật ký kiểm toán.&quot;</em></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="5-ghi-chu-them-cho-designer">5. Ghi Chú Thêm Cho Designer</h2>
+<ul>
+<li><strong>Phong cách thiết kế:</strong> Sử dụng phong cách Glassmorphism nhẹ nhàng (mờ nền) cho các popup điều hướng và bảng phê duyệt trên thiết bị di động để tạo sự hiện đại, sang trọng.</li>
+<li><strong>Khả năng tiếp cận (Accessibility):</strong><ul>
+<li>Đảm bảo tỷ lệ tương phản chữ đạt tiêu chuẩn WCAG 2.1 AA (tỷ lệ tương phản tối thiểu 4.5:1 đối với văn bản thông thường).</li>
+<li>Tích hợp điều khiển giọng nói (TTS/STT) trực quan để hỗ trợ nhân viên thao tác rảnh tay.</li>
+</ul>
+</li>
+<li><strong>Hiệu ứng chuyển cảnh (Transitions):</strong> Các hiệu ứng mở cửa sổ chat, lướt phê duyệt cần có độ trễ cực thấp (&lt;150ms) tạo cảm giác ứng dụng mượt mà, phản hồi tức thì.</li>
+</ul>
+<h2 id="3-tong-hop-cac-man-hinh-screens-overview">3. Tổng Hợp Các Màn Hình (Screens Overview)</h2>
+<p>Bảng tổng hợp nhanh các màn hình đã thiết kế chi tiết ở trên để theo dõi trạng thái và sự liên kết:</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Slug</th>
+<th>Status</th>
+<th>Used by (UC / FR)</th>
+<th>Figma</th>
+<th>HTML prototype</th>
+<th>Updated</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><a href="#screen-1-man-hinh-dang-nhap-xac-thuc-otp-authentication-screen">auth-login</a></td>
+<td>draft</td>
+<td>uc-login-email</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#screen-2-man-hinh-danh-sach-hoi-thoai-chat-list-screen---home">chat-list</a></td>
+<td>draft</td>
+<td>uc-chat-navigation</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#screen-3-man-hinh-chi-tiet-chat-1-1-nhom-ai-chat-screen">chat-detail</a></td>
+<td>draft</td>
+<td>uc-chat-messaging</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="#screen-4-man-hinh-quan-ly-nhom--phan-quyen-group-settings--admin">group-settings</a></td>
+<td>draft</td>
+<td>uc-group-admin</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="#screen-5-man-hinh-danh-ba--to-chuc-contact--org-chart">contact-directory</a></td>
+<td>draft</td>
+<td>uc-contact-directory</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="#screen-6-man-hinh-tim-kiem-toan-cuc-global-search">search-results</a></td>
+<td>draft</td>
+<td>uc-global-search</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="#screen-7-man-hinh-thong-tin-ca-nhan--cai-dat-user-profile--settings">user-profile</a></td>
+<td>draft</td>
+<td>uc-profile-settings</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="#screen-8-bang-dieu-khien-quan-tri-audit-log-admin-panel">admin-panel</a></td>
+<td>draft</td>
+<td>uc-admin-compliance</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#screen-2-man-hinh-danh-sach-hoi-thoai-chat-list-screen---home">chat-list</a></td>
+<td>draft</td>
+<td>uc-chat-navigation / FR-8.1, FR-8.2, FR-8.5, FR-16.12</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#screen-3-man-hinh-chi-tiet-chat-1-1-nhom-ai-chat-screen">chat-detail</a></td>
+<td>draft</td>
+<td>uc-chat-messaging, uc-ai-helper / FR-2, FR-5, FR-11.1..11.4</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="#screen-4-man-hinh-quan-ly-nhom--phan-quyen-group-settings--admin">group-settings</a></td>
+<td>draft</td>
+<td>uc-group-admin</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="#screen-5-man-hinh-danh-ba--to-chuc-contact--org-chart">contact-directory</a></td>
+<td>draft</td>
+<td>uc-contact-directory</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="#screen-6-man-hinh-tim-kiem-toan-cuc-global-search">search-results</a></td>
+<td>draft</td>
+<td>uc-global-search</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="#screen-7-man-hinh-phe-duyet-quy-trinh-workflow-approval-screen">workflow-approval</a></td>
+<td>draft</td>
+<td>uc-workflow-approval / FR-14.1, FR-14.2, FR-14.4</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="#screen-8-man-hinh-tro-ly-ai--prompt-hub-ai-hub">ai-hub</a></td>
+<td>draft</td>
+<td>uc-ai-hub</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="#screen-9-man-hinh-thong-tin-ca-nhan--cai-dat-user-profile--settings">user-profile</a></td>
+<td>draft</td>
+<td>uc-profile-settings</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="#screen-10-man-hinh-dashboard-ban-lanh-dao-bod-dashboard-screen">bod-dashboard</a></td>
+<td>draft</td>
+<td>uc-bod-decide / FR-15.1..15.4, FR-15.14</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="#screen-11-bang-dieu-khien-quan-tri-audit-log-admin-panel">admin-panel</a></td>
+<td>draft</td>
+<td>uc-admin-compliance / FR-9.1..9.3, FR-9.6</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#screen-2-man-hinh-danh-sach-hoi-thoai-chat-list-screen---home">chat-list</a></td>
+<td>draft</td>
+<td>uc-chat-navigation / FR-8.1, FR-8.2, FR-8.5, FR-16.12</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#screen-3-man-hinh-chi-tiet-chat-1-1-nhom-ai-chat-screen">chat-detail</a></td>
+<td>draft</td>
+<td>uc-chat-messaging, uc-ai-helper / FR-2, FR-5, FR-11.1..11.4</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="#screen-4-man-hinh-phe-duyet-quy-trinh-workflow-approval-screen">workflow-approval</a></td>
+<td>draft</td>
+<td>uc-workflow-approval / FR-14.1, FR-14.2, FR-14.4</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="#screen-5-man-hinh-dashboard-ban-lanh-dao-bod-dashboard-screen">bod-dashboard</a></td>
+<td>draft</td>
+<td>uc-bod-decide / FR-15.1..15.4, FR-15.14</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="#screen-6-bang-dieu-khien-quan-tri-audit-log-admin-panel">admin-panel</a></td>
+<td>draft</td>
+<td>uc-admin-compliance / FR-9.1..9.3, FR-9.6</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="#screen-7-man-hinh-thong-tin-ca-nhan--cai-dat-user-profile--settings">user-profile</a></td>
+<td>draft</td>
+<td>uc-profile-settings</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="#screen-8-man-hinh-quan-ly-nhom--phan-quyen-group-settings--admin">group-settings</a></td>
+<td>draft</td>
+<td>uc-group-admin</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="#screen-9-man-hinh-danh-ba--to-chuc-contact--org-chart">contact-directory</a></td>
+<td>draft</td>
+<td>uc-contact-directory</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="#screen-10-man-hinh-tim-kiem-toan-cuc-global-search">search-results</a></td>
+<td>draft</td>
+<td>uc-global-search</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="#screen-11-man-hinh-tro-ly-ai--prompt-hub-ai-hub">ai-hub</a></td>
+<td>draft</td>
+<td>uc-ai-hub</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="4-edge-cases-truong-hop-ngoai-le-huong-xu-ly-ux">4. Edge Cases (Trường Hợp Ngoại Lệ & Hướng Xử Lý UX)</h2>
+<ul>
+<li><strong>Trường hợp 1: Thiết bị mất kết nối mạng đột ngột khi đang phê duyệt quy trình.</strong><ul>
+<li><strong>Hướng xử lý UX:</strong> Vô hiệu hóa tạm thời nút &quot;Phê duyệt&quot;/&quot;Từ chối&quot;. Hiển thị một toast thông báo màu đỏ ở cạnh dưới màn hình: <em>&quot;Mất kết nối mạng. Yêu cầu phê duyệt của bạn đã được đưa vào hàng đợi offline và sẽ tự động gửi lại khi có mạng.&quot;</em></li>
+</ul>
+</li>
+<li><strong>Trường hợp 2: Nhân viên chỉnh sửa tin nhắn có chứa nội dung phê duyệt quy trình.</strong><ul>
+<li><strong>Hướng xử lý UX:</strong> Hệ thống không cho phép sửa nội dung các tin nhắn mang tính chất giao dịch quy trình (nút phê duyệt). Nếu là tin nhắn chat thường, hiển thị nhãn rõ ràng <em>&quot;Đã chỉnh sửa&quot;</em> kèm lịch sử sửa khi click vào nhãn (phục vụ audit).</li>
+</ul>
+</li>
+<li><strong>Trường hợp 3: Tin nhắn chat chứa thông tin nhạy cảm hoặc vi phạm chính sách bảo mật công ty (ví dụ: chia sẻ mật khẩu, mã nguồn).</strong><ul>
+<li><strong>Hướng xử lý UX:</strong> Hệ thống AI quét ngầm realtime (theo chính sách DLP của doanh nghiệp). Nếu phát hiện vi phạm, tin nhắn sẽ bị ẩn đi kèm thông báo cho người gửi: <em>&quot;Tin nhắn bị ẩn do vi phạm chính sách bảo mật thông tin doanh nghiệp. Hành động đã được ghi vào nhật ký kiểm toán.&quot;</em></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="5-ghi-chu-them-cho-designer">5. Ghi Chú Thêm Cho Designer</h2>
+<ul>
+<li><strong>Phong cách thiết kế:</strong> Sử dụng phong cách Glassmorphism nhẹ nhàng (mờ nền) cho các popup điều hướng và bảng phê duyệt trên thiết bị di động để tạo sự hiện đại, sang trọng.</li>
+<li><strong>Khả năng tiếp cận (Accessibility):</strong><ul>
+<li>Đảm bảo tỷ lệ tương phản chữ đạt tiêu chuẩn WCAG 2.1 AA (tỷ lệ tương phản tối thiểu 4.5:1 đối với văn bản thông thường).</li>
+<li>Tích hợp điều khiển giọng nói (TTS/STT) trực quan để hỗ trợ nhân viên thao tác rảnh tay.</li>
+</ul>
+</li>
+<li><strong>Hiệu ứng chuyển cảnh (Transitions):</strong> Các hiệu ứng mở cửa sổ chat, lướt phê duyệt cần có độ trễ cực thấp (&lt;150ms) tạo cảm giác ứng dụng mượt mà, phản hồi tức thì.</li>
+</ul>
+<h2 id="3-tong-hop-cac-man-hinh-screens-overview">3. Tổng Hợp Các Màn Hình (Screens Overview)</h2>
+<p>Bảng tổng hợp nhanh các màn hình đã thiết kế chi tiết ở trên để theo dõi trạng thái và sự liên kết:</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Slug</th>
+<th>Status</th>
+<th>Used by (UC / FR)</th>
+<th>Figma</th>
+<th>HTML prototype</th>
+<th>Updated</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><a href="#screen-1-man-hinh-dang-nhap-xac-thuc-otp-authentication-screen">auth-login</a></td>
+<td>draft</td>
+<td>uc-login-email</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#screen-2-man-hinh-danh-sach-hoi-thoai-chat-list-screen---home">chat-list</a></td>
+<td>draft</td>
+<td>uc-chat-navigation</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#screen-3-man-hinh-chi-tiet-chat-1-1-nhom-ai-chat-screen">chat-detail</a></td>
+<td>draft</td>
+<td>uc-chat-messaging</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="#screen-4-man-hinh-quan-ly-nhom--phan-quyen-group-settings--admin">group-settings</a></td>
+<td>draft</td>
+<td>uc-group-admin</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="#screen-5-man-hinh-danh-ba--to-chuc-contact--org-chart">contact-directory</a></td>
+<td>draft</td>
+<td>uc-contact-directory</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="#screen-6-man-hinh-tim-kiem-toan-cuc-global-search">search-results</a></td>
+<td>draft</td>
+<td>uc-global-search</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="#screen-7-man-hinh-thong-tin-ca-nhan--cai-dat-user-profile--settings">user-profile</a></td>
+<td>draft</td>
+<td>uc-profile-settings</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="#screen-8-bang-dieu-khien-quan-tri-audit-log-admin-panel">admin-panel</a></td>
+<td>draft</td>
+<td>uc-admin-compliance</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#screen-2-man-hinh-danh-sach-hoi-thoai-chat-list-screen---home">chat-list</a></td>
+<td>draft</td>
+<td>uc-chat-navigation</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#screen-3-man-hinh-chi-tiet-chat-1-1-nhom-ai-chat-screen">chat-detail</a></td>
+<td>draft</td>
+<td>uc-chat-messaging</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="#screen-4-man-hinh-quan-ly-nhom--phan-quyen-group-settings--admin">group-settings</a></td>
+<td>draft</td>
+<td>uc-group-admin</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="#screen-5-man-hinh-danh-ba--to-chuc-contact--org-chart">contact-directory</a></td>
+<td>draft</td>
+<td>uc-contact-directory</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="#screen-6-man-hinh-tim-kiem-toan-cuc-global-search">search-results</a></td>
+<td>draft</td>
+<td>uc-global-search</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="#screen-7-man-hinh-thong-tin-ca-nhan--cai-dat-user-profile--settings">user-profile</a></td>
+<td>draft</td>
+<td>uc-profile-settings</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="#screen-8-man-hinh-dashboard-ban-lanh-dao-bod-dashboard-screen">bod-dashboard</a></td>
+<td>draft</td>
+<td>uc-bod-decide</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="#screen-9-bang-dieu-khien-quan-tri-audit-log-admin-panel">admin-panel</a></td>
+<td>draft</td>
+<td>uc-admin-compliance</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#screen-2-man-hinh-danh-sach-hoi-thoai-chat-list-screen---home">chat-list</a></td>
+<td>draft</td>
+<td>uc-chat-navigation / FR-8.1, FR-8.2, FR-8.5, FR-16.12</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#screen-3-man-hinh-chi-tiet-chat-1-1-nhom-ai-chat-screen">chat-detail</a></td>
+<td>draft</td>
+<td>uc-chat-messaging, uc-ai-helper / FR-2, FR-5, FR-11.1..11.4</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="#screen-4-man-hinh-phe-duyet-quy-trinh-workflow-approval-screen">workflow-approval</a></td>
+<td>draft</td>
+<td>uc-workflow-approval / FR-14.1, FR-14.2, FR-14.4</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="#screen-5-man-hinh-dashboard-ban-lanh-dao-bod-dashboard-screen">bod-dashboard</a></td>
+<td>draft</td>
+<td>uc-bod-decide / FR-15.1..15.4, FR-15.14</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="#screen-6-bang-dieu-khien-quan-tri-audit-log-admin-panel">admin-panel</a></td>
+<td>draft</td>
+<td>uc-admin-compliance / FR-9.1..9.3, FR-9.6</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="#screen-7-man-hinh-thong-tin-ca-nhan--cai-dat-user-profile--settings">user-profile</a></td>
+<td>draft</td>
+<td>uc-profile-settings</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="#screen-8-man-hinh-quan-ly-nhom--phan-quyen-group-settings--admin">group-settings</a></td>
+<td>draft</td>
+<td>uc-group-admin</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="#screen-9-man-hinh-danh-ba--to-chuc-contact--org-chart">contact-directory</a></td>
+<td>draft</td>
+<td>uc-contact-directory</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="#screen-10-man-hinh-tim-kiem-toan-cuc-global-search">search-results</a></td>
+<td>draft</td>
+<td>uc-global-search</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="#screen-11-man-hinh-tro-ly-ai--prompt-hub-ai-hub">ai-hub</a></td>
+<td>draft</td>
+<td>uc-ai-hub</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="4-edge-cases-truong-hop-ngoai-le-huong-xu-ly-ux">4. Edge Cases (Trường Hợp Ngoại Lệ & Hướng Xử Lý UX)</h2>
+<ul>
+<li><strong>Trường hợp 1: Tin nhắn chat chứa thông tin nhạy cảm hoặc vi phạm chính sách bảo mật công ty (ví dụ: chia sẻ mật khẩu, mã nguồn).</strong><ul>
+<li><strong>Hướng xử lý UX:</strong> Hệ thống AI quét ngầm realtime (theo chính sách DLP của doanh nghiệp). Nếu phát hiện vi phạm, tin nhắn sẽ bị ẩn đi kèm thông báo cho người gửi: <em>&quot;Tin nhắn bị ẩn do vi phạm chính sách bảo mật thông tin doanh nghiệp. Hành động đã được ghi vào nhật ký kiểm toán.&quot;</em></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="5-ghi-chu-them-cho-designer">5. Ghi Chú Thêm Cho Designer</h2>
+<ul>
+<li><strong>Phong cách thiết kế:</strong> Sử dụng phong cách Glassmorphism nhẹ nhàng (mờ nền) cho các popup điều hướng và bảng phê duyệt trên thiết bị di động để tạo sự hiện đại, sang trọng.</li>
+<li><strong>Khả năng tiếp cận (Accessibility):</strong><ul>
+<li>Đảm bảo tỷ lệ tương phản chữ đạt tiêu chuẩn WCAG 2.1 AA (tỷ lệ tương phản tối thiểu 4.5:1 đối với văn bản thông thường).</li>
+<li>Tích hợp điều khiển giọng nói (TTS/STT) trực quan để hỗ trợ nhân viên thao tác rảnh tay.</li>
+</ul>
+</li>
+<li><strong>Hiệu ứng chuyển cảnh (Transitions):</strong> Các hiệu ứng mở cửa sổ chat, lướt phê duyệt cần có độ trễ cực thấp (&lt;150ms) tạo cảm giác ứng dụng mượt mà, phản hồi tức thì.</li>
+</ul>
+<h3 id="screen-9-man-hinh-thong-tin-ca-nhan-cai-at-user-profile-settings">Screen 9: Màn hình Thông tin cá nhân & Cài đặt (User Profile & Settings)</h3>
+<p><strong>Mục đích:</strong> Quản lý thông tin định danh nội bộ, cài đặt trạng thái hoạt động và cá nhân hóa trải nghiệm.</p>
+<h4 id="a-phac-hoa-giao-dien-wireframe-visual-sequence">A. Phác họa Giao diện (Wireframe - Visual Sequence)</h4>
+<details>
+<summary>📱 Thông tin cá nhân <code>user-profile</code></summary><pre><code class="language-text">┌─────────────────────────────────────────┐
+│ [ &lt; ]  Thông tin tài khoản              │
+├─────────────────────────────────────────┤
+│        [ 🧑 Avatar lớn ]                │
+│        Trần Văn C                       │
+│        Trưởng phòng Marketing           │
+│        tranc@company.com | 0901234567   │
+├─────────────────────────────────────────┤
+│ Trạng thái:                             │
+│ ( ) Online   (x) Bận   ( ) Đi vắng      │
+├─────────────────────────────────────────┤
+│ ⚙️ Cài đặt ứng dụng                      │
+│ - 🔔 Thông báo (Bật)                     │
+│ - 🌙 Giao diện tối (Tự động)             │
+│ - 🔒 Quyền riêng tư &amp; Bảo mật            │
+├─────────────────────────────────────────┤
+│ [     Đăng xuất khỏi thiết bị này     ] │
+└─────────────────────────────────────────┘
+</code></pre>
+</details><h4 id="b-cau-truc-layout-components-anatomy">B. Cấu trúc Layout & Components (Anatomy)</h4>
+<ul>
+<li><strong>Header:</strong> Nút Back + Tiêu đề.</li>
+<li><strong>Body/Main Content:</strong><ul>
+<li>Avatar, Họ tên, Chức vụ, Email công ty, Số điện thoại.</li>
+<li>Quản lý trực tiếp (Manager) &amp; Phòng ban trực thuộc.</li>
+<li>Radio buttons/Dropdown chọn trạng thái hoạt động (Presence).</li>
+<li>List menu cài đặt: Thông báo (push/email), Giao diện (Dark/Light mode), Bảo mật (Đổi mã PIN/FaceID).</li>
+</ul>
+</li>
+<li><strong>Footer:</strong> Nút Đăng xuất màu đỏ.</li>
+</ul>
+<h4 id="c-component-data">C. Component & Data</h4>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Loại</th>
+<th>Mô tả dữ liệu / Logic</th>
+<th>Ràng buộc (Validation)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Trạng thái</td>
+<td>Radio/Select</td>
+<td>Đồng bộ trạng thái hiện diện (Presence) tới tất cả người dùng khác realtime.</td>
+<td>Các trạng thái tự động reset về Online vào đầu giờ làm việc hôm sau (tùy chọn).</td>
+</tr>
+<tr>
+<td>Nút Đăng xuất</td>
+<td>Destructive CTA</td>
+<td>Xóa toàn bộ token phiên đăng nhập, xóa cache nội dung chat offline để bảo mật.</td>
+<td>Yêu cầu xác nhận 2 lần trước khi đăng xuất.</td>
+</tr>
+</tbody></table>
+<hr>
 <h3 id="screen-10-man-hinh-dashboard-ban-lanh-ao-bod-dashboard-screen">Screen 10: Màn hình Dashboard Ban Lãnh Đạo (BOD Dashboard Screen)</h3>
 <p><strong>Mục đích:</strong> Cung cấp thông tin tổng hợp trực quan và hỗ trợ AI ra quyết định nhanh cho ban lãnh đạo.</p>
 <h4 id="a-phac-hoa-giao-dien-wireframe-visual-sequence">A. Phác họa Giao diện (Wireframe - Visual Sequence)</h4>
@@ -1334,6 +2254,69 @@
 <td><a href="#screen-1-man-hinh-dang-nhap-xac-thuc-otp-authentication-screen">auth-login</a></td>
 <td>draft</td>
 <td>uc-login-email</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#screen-2-man-hinh-danh-sach-hoi-thoai-chat-list-screen---home">chat-list</a></td>
+<td>draft</td>
+<td>uc-chat-navigation</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#screen-3-man-hinh-chi-tiet-chat-1-1-nhom-ai-chat-screen">chat-detail</a></td>
+<td>draft</td>
+<td>uc-chat-messaging</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="#screen-4-man-hinh-quan-ly-nhom--phan-quyen-group-settings--admin">group-settings</a></td>
+<td>draft</td>
+<td>uc-group-admin</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="#screen-5-man-hinh-danh-ba--to-chuc-contact--org-chart">contact-directory</a></td>
+<td>draft</td>
+<td>uc-contact-directory</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="#screen-6-man-hinh-tim-kiem-toan-cuc-global-search">search-results</a></td>
+<td>draft</td>
+<td>uc-global-search</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="#screen-7-man-hinh-thong-tin-ca-nhan--cai-dat-user-profile--settings">user-profile</a></td>
+<td>draft</td>
+<td>uc-profile-settings</td>
+<td>—</td>
+<td>—</td>
+<td>2026-05-28</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="#screen-8-bang-dieu-khien-quan-tri-audit-log-admin-panel">admin-panel</a></td>
+<td>draft</td>
+<td>uc-admin-compliance</td>
 <td>—</td>
 <td>—</td>
 <td>2026-05-28</td>
