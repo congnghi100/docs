@@ -206,6 +206,7 @@
     - Dịch tự động (Translate)
     - Chỉnh sửa (Edit - giới hạn thời gian/quyền)
     - Thu hồi / Xóa (Delete/Unsend)
+    - **Chi tiết đã xem (Message Info):** Hiển thị danh sách những người đã xem tin nhắn và thời gian xem cụ thể (Read Receipts).
 - **Footer/Input Area:**
   - Nút Đính kèm `[+]` (Mở rộng menu Menu Attachment kiểu lưới):
     - 📷 Ảnh/Video (Từ thư viện hoặc Camera).
@@ -223,7 +224,7 @@
 | Avatar | Image/Badge | Hình ảnh đại diện cá nhân hoặc nhóm (ghép từ nhiều user avatar nếu không có ảnh gốc). | Tỷ lệ 1:1, bo tròn. Kích thước 40px ở Header, 32px ở cạnh tin nhắn. |
 | Group/User Name | Typography | Tên định danh của người chat hoặc nhóm. | Cắt chữ (truncate) `...` nếu vượt quá không gian hiển thị của màn hình. |
 | Tin nhắn văn bản | Rich Text Bubble | Hiển thị chữ, @mention, inline-link preview. Hỗ trợ định dạng văn bản (Bold, Italic, Strikethrough, Monospace, **Spoiler** làm mờ chữ). Cho phép thả **Reaction** bằng emoji trực tiếp. | Tối đa 4000 ký tự mỗi tin. |
-| Context Menu (Menu Tương tác) | Dropdown/Modal | Chuột phải/Long press vào tin nhắn để mở menu (Reply, Forward, Pin, Copy, Edit, Delete, Translate). | Edit/Delete chỉ dành cho tin nhắn của chính mình hoặc role Admin nhóm. |
+| Context Menu (Menu Tương tác) | Dropdown/Modal | Chuột phải/Long press vào tin nhắn để mở menu (Reply, Forward, Pin, Copy, Edit, Delete, Translate, Message Info). | Edit/Delete chỉ dành cho tin nhắn của chính mình. Tính năng "Xem ai đã đọc" chỉ khả dụng cho tin nhắn của mình gửi đi trong nhóm nhỏ. |
 | Đính kèm file & Media | File Upload | Gửi hình ảnh (cho phép gom nhóm thành Album), video, tệp tài liệu nguyên bản không giảm dung lượng. | Giới hạn tối đa 50MB/file (hoặc tuỳ server). |
 | Bình chọn (Poll) | Interactive Element | Form khảo sát trực tiếp trong chat. Hỗ trợ các chế độ: Ẩn danh (Anonymous), Đa lựa chọn (Multiple answers), Chế độ đố vui (Quiz mode). | Tối đa 10 lựa chọn mỗi Poll. |
 | Vị trí (Location) | Maps UI | Gửi bản đồ tĩnh có ghim vị trí hoặc Chia sẻ vị trí trực tiếp (Live Location) chạy theo thời gian thực (15 phút, 1 giờ, 8 giờ). | Yêu cầu cấp quyền truy cập GPS của thiết bị. |
@@ -241,7 +242,7 @@
 #### E. Copywriting (Microcopy)
 - Input Placeholder: `Tin nhắn...` hoặc `Nhập tin nhắn...`
 - System notification: `[Tên] đã tham gia nhóm bằng mã QR.`
-- Context Menu: `Trả lời` | `Chuyển tiếp` | `Ghim` | `Sao chép` | `Chỉnh sửa` | `Thu hồi` | `Xóa cho tôi` | `Dịch`
+- Context Menu: `Trả lời` | `Chuyển tiếp` | `Ghim` | `Sao chép` | `Chỉnh sửa` | `Thu hồi` | `Xóa cho tôi` | `Dịch` | `Chi tiết đã xem`
 - Typing Indicator: `[Tên] đang nhập tin nhắn...` / `[Tên] đang gửi một hình ảnh...`
 
 ---
@@ -253,14 +254,18 @@
 <details>
 <summary>📱 Tùy chỉnh nhóm <code>group-settings</code></summary>
 
+**Mô tả:** Màn hình cung cấp các công cụ quản lý nhóm mạnh mẽ tương tự Telegram, với khả năng phân quyền chi tiết.
+
 ```text
 ┌─────────────────────────────────────────┐
 │ [ < ]  Tùy chỉnh nhóm               [⚙️]│
 ├─────────────────────────────────────────┤
 │        [ 👥 Avatar Nhóm ]               │
 │        Dự án Chiến dịch X (45 TV)       │
+│        [ 🔗 Sao chép link mời ]         │
 ├─────────────────────────────────────────┤
-│ 📁 Kho lưu trữ (Media, Files, Links)    │
+│ 🔔 Thông báo & Âm thanh         [ Bật ] │
+│ 📁 Kho lưu trữ: 12 Ảnh, 5 Files, 3 Links│
 │ 📌 Tin nhắn đã ghim (3)                 │
 ├─────────────────────────────────────────┤
 │ 👥 Thành viên nhóm:                     │
@@ -269,24 +274,43 @@
 │ [➕ Thêm thành viên mới]                │
 ├─────────────────────────────────────────┤
 │ 🛡️ Phân quyền nhóm (Dành cho Admin)     │
-│ - Ai được quyền ghim tin: [Admin]       │
-│ - Quyền gửi tin: [Tất cả mọi người]     │
+│ - Phê duyệt người vào nhóm:      [ Bật ]│
+│ - Quyền gửi tin:      [Tất cả mọi người]│
+│ - Quyền ghim tin nhắn:           [Admin]│
+│ - Chế độ chậm (Slow mode):       [ Tắt ]│
+├─────────────────────────────────────────┤
+│ 🚫 Danh sách chặn (Banned Users)        │
 └─────────────────────────────────────────┘
 ```
 </details>
 
 #### B. Cấu trúc Layout & Components (Anatomy)
-- **Header:** Nút Back, Tên nhóm.
+- **Header:** Nút Back, Tên nhóm, Menu Hành động (Rời nhóm, Chuyển quyền).
 - **Body/Main Content:**
-  - Khối Thông tin chung: Avatar, Tên nhóm, Mô tả.
-  - Khối Tiện ích: Kho lưu trữ chung (ảnh, file pdf/docx, links), Tin nhắn đã ghim.
-  - Khối Thành viên: Danh sách user, role (Trưởng nhóm, Phó nhóm, Thành viên). Nút thêm thành viên mới, nút xóa (nếu là Admin).
-  - Khối Phân quyền: Dropdown giới hạn quyền (Ghim tin nhắn, Gửi file, Nhắc @all).
+  - **Khối Thông tin chung:** Avatar lớn, Tên nhóm, Mô tả nhóm. Nút chia sẻ link mời nhanh (Invite Link / QR Code).
+  - **Khối Cài đặt chung:** 
+    - Thông báo (Tắt trong 1h, 8h, Mãi mãi). 
+    - Tùy chỉnh âm thanh riêng biệt cho nhóm.
+  - **Khối Kho lưu trữ (Shared Media):** Phân chia thành các tab riêng: Media (Ảnh/Video), Files (Tài liệu), Links (Liên kết web), Voice (Ghi âm).
+  - **Khối Thành viên:** Danh sách user, role (Owner, Admin, Member). Nút thêm thành viên mới, nút kick/ban.
+  - **Khối Quản trị (Chỉ Admin thấy):** 
+    - Yêu cầu phê duyệt người tham gia (Approve new members).
+    - Cài đặt quyền nhóm (Gửi tin, Gửi Media, Thêm người, Ghim tin).
+    - Chế độ chậm (Slow Mode - chống spam).
+    - Danh sách chặn (Banned Users).
+
+#### C. Component & Data
+| Component | Loại | Mô tả dữ liệu / Logic | Ràng buộc (Validation) |
+|-----------|------|------------------------|-----------------------|
+| Kho lưu trữ | Tabbed View | Hiển thị tất cả file từng gửi trong nhóm. | Chỉ hiển thị file còn tồn tại. |
+| Link mời (Invite Link) | Clipboard / QR | Cho phép admin tạo link tham gia. Có thể thu hồi (Revoke) link cũ. | Link mã hóa an toàn. |
+| Danh sách thành viên | List Item | Hiển thị kèm badge chức danh (👑 Admin, 🛡️ Trợ lý). | Sắp xếp: Mình > Admin > Online > Offline. |
+| Menu phân quyền | Toggle / Select | Bật/tắt các đặc quyền trong nhóm. | Chỉ Owner/Admin mới được thao tác. |
 
 ---
 
 ### Screen 5: Màn hình Danh bạ & Tổ chức (Contact & Org Chart)
-**Mục đích:** Tra cứu nhanh thông tin liên lạc của đồng nghiệp theo sơ đồ phòng ban.
+**Mục đích:** Tra cứu nhanh thông tin liên lạc của đồng nghiệp theo sơ đồ phòng ban hoặc chuyên môn.
 
 #### A. Phác họa Giao diện (Wireframe - Visual Sequence)
 <details>
@@ -295,6 +319,11 @@
 ```text
 ┌─────────────────────────────────────────┐
 │ Danh bạ tổ chức                     [🔍]│
+├─────────────────────────────────────────┤
+│ [ Tên, Số điện thoại, Kỹ năng...      ] │
+├─────────────────────────────────────────┤
+│ ⭐ Yêu thích (Favorites)                │
+│ - (O) Lê Thị B (QA)                     │
 ├─────────────────────────────────────────┤
 │  [ Công ty ]  [ Nhóm làm việc ]         │
 ├─────────────────────────────────────────┤
@@ -307,151 +336,165 @@
 │ 🏢 Khối Kinh doanh (200)                │
 │   └─ ...                                │
 ├─────────────────────────────────────────┤
-│   💬         👥         📋         🤖   │
+│   💬         👥         👤              │
 └─────────────────────────────────────────┘
 ```
 </details>
 
 #### B. Cấu trúc Layout & Components (Anatomy)
-- **Header:** Thanh tìm kiếm người dùng.
+- **Header:** Tiêu đề và nút Tìm kiếm nâng cao.
 - **Body/Main Content:**
-  - Cấu trúc cây (Tree view) lồng nhau theo: Khối -> Phòng ban -> Nhân viên.
-  - Cho phép mở rộng (expand) hoặc thu gọn (collapse) các nhánh.
-  - Bấm vào nhân viên sẽ mở popup xem Mini-Profile (nhắn tin, gọi audio nhanh).
+  - **Thanh tìm kiếm thông minh:** Hỗ trợ tìm kiếm theo Tên, Email, Số điện thoại, hoặc chuyên môn/kỹ năng (VD: "Designer", "Python").
+  - **Liên hệ yêu thích (Favorites):** Danh sách ghim các đồng nghiệp hay trao đổi.
+  - **Cấu trúc cây tổ chức (Tree view):** Phân cấp theo Khối -> Phòng ban -> Nhân viên.
+  - **Mini-profile (Popup):** Khi chạm vào một liên hệ, hiển thị popup nhanh chứa: Avatar lớn, Email, SĐT, Trạng thái hoạt động, và các nút CTA (Chat nhanh, Gọi điện thoại, Gọi Video).
+- **Footer:** Bottom Navigation Bar (`Tin nhắn | Danh bạ | Cá nhân`).
+
+#### C. Component & Data
+| Component | Loại | Mô tả dữ liệu / Logic | Ràng buộc (Validation) |
+|-----------|------|------------------------|-----------------------|
+| Tree View | Accordion List | Hiển thị cấu trúc công ty. | Expand/Collapse mượt mà. Tự động tải lười (Lazy load) khi nhánh quá đông. |
+| Cột trạng thái | Icon/Badge | Hiển thị (O) Online, (Z) Away, (X) Offline. | Real-time update qua WebSocket. |
+| Mini-Profile | Bottom Sheet / Modal | Tóm tắt hồ sơ nhân viên để tương tác nhanh. | Nếu người dùng cài đặt riêng tư ẩn SĐT thì hiển thị `***`. |
 
 ---
 
 ### Screen 6: Màn hình Tìm kiếm toàn cục (Global Search)
-**Mục đích:** Tìm kiếm xuyên suốt mọi dữ liệu được phép truy cập trong doanh nghiệp.
+**Mục đích:** Tìm kiếm mạnh mẽ và có bộ lọc chi tiết cho toàn bộ dữ liệu trong hệ thống.
 
 #### A. Phác họa Giao diện (Wireframe - Visual Sequence)
 <details>
-<summary>📱 Tìm kiếm <code>search-results</code></summary>
+<summary>📱 Tìm kiếm toàn cục <code>global-search</code></summary>
 
 ```text
 ┌─────────────────────────────────────────┐
-│ [ < ] 🔍 báo cáo quý 3                  │
+│ [ < ] [ báo cáo tháng 10...         ] [X]│
 ├─────────────────────────────────────────┤
-│ [Tất cả] [Tin nhắn] [Tệp tin] [Danh bạ] │
+│ Bộ lọc: [📅 Từ ngày] [👤 Người gửi]     │
+│         [📎 Chứa tệp] [🔗 Chứa link]    │
 ├─────────────────────────────────────────┤
-│ 📄 Tệp tin (2):                         │
-│ - bao_cao_Q3_final.pdf (Gửi trong Nhóm) │
-│ - so_lieu_Q3.xlsx (Gửi bởi Kế toán)     │
+│ [ Tất cả ] [ Tin nhắn ] [ Người ] [ Tệp ]│
 ├─────────────────────────────────────────┤
-│ 💬 Tin nhắn (1):                        │
-│ - Nguyễn Văn A: "Anh gửi báo cáo quý 3" │
+│ Kết quả tìm kiếm (15):                  │
+│ 👤 Nhóm Kế toán                         │
+│    Lê Thị B: Nhớ nộp báo cáo tháng 10...│
+│    20/10/2026                           │
+│                                         │
+│ 📁 Báo_cáo_tháng_10_Final.pdf           │
+│    Từ: Nguyễn Văn A (Phòng ban X)       │
 └─────────────────────────────────────────┘
 ```
 </details>
 
 #### B. Cấu trúc Layout & Components (Anatomy)
-- **Header:** Input tìm kiếm tự động focus, nút X xóa từ khóa.
+- **Header:** Thanh Input Search tự động focus.
 - **Body/Main Content:**
-  - Thanh Tab phân loại kết quả (Tất cả, Tin nhắn, Tệp tin, Liên hệ).
-  - List View hiển thị kết quả, highlight (bôi đậm) từ khóa trùng khớp trong văn bản.
+  - **Trạng thái Trống (Empty State):** Khi chưa gõ từ khóa, hiển thị "Lịch sử tìm kiếm" và "Từ khóa gợi ý".
+  - **Bộ lọc nâng cao (Advanced Filters):** Dạng thẻ cuộn ngang (Chips) để lọc theo: `Từ người gửi`, `Ngày tháng`, `Chứa tệp đính kèm`, `Trong nhóm cụ thể`.
+  - **Tabs phân loại:** Chia kết quả thành `Tất cả` (All), `Tin nhắn` (Messages), `Người/Nhóm` (Chats), `Media/Files` (Tệp).
+  - **Danh sách kết quả:** Highlight (bôi vàng) từ khóa trùng khớp trong văn bản.
+
+#### C. Component & Data
+| Component | Loại | Mô tả dữ liệu / Logic | Ràng buộc (Validation) |
+|-----------|------|------------------------|-----------------------|
+| Thanh Search | Input Field | Hỗ trợ cú pháp đặc biệt (VD: `from:Admin`). | Debounce 300ms trước khi gọi API. |
+| Tabs Kết quả | Tab Navigation | Lọc kết quả theo định dạng dữ liệu. | Hiển thị số lượng tìm thấy (VD: Tệp (3)). |
+| Highlight Text | Styled Text | Bôi đậm/vàng từ khóa trong chuỗi kết quả trả về. | Hỗ trợ không phân biệt dấu tiếng Việt. |
 
 ---
 
 ### Screen 7: Màn hình Thông tin cá nhân & Cài đặt (User Profile & Settings)
-**Mục đích:** Quản lý thông tin định danh nội bộ, cài đặt trạng thái hoạt động và cá nhân hóa trải nghiệm.
+**Mục đích:** Quản lý tài khoản, trạng thái hiện diện và cài đặt ứng dụng.
 
 #### A. Phác họa Giao diện (Wireframe - Visual Sequence)
 <details>
-<summary>📱 Thông tin cá nhân <code>user-profile</code></summary>
+<summary>📱 Cài đặt cá nhân <code>user-profile</code></summary>
 
 ```text
 ┌─────────────────────────────────────────┐
-│ [ < ]  Thông tin tài khoản              │
+│ Thông tin cá nhân                       │
 ├─────────────────────────────────────────┤
-│        [ 🧑 Avatar lớn ]                │
-│        Trần Văn C                       │
-│        Trưởng phòng Marketing           │
-│        tranc@company.com | 0901234567   │
+│        [ 👤 Avatar ]                    │
+│        Nguyễn Văn A                     │
+│        Trưởng nhóm Phát triển           │
+│  [ 🌴 Đang nghỉ phép mát... ✏️ ]        │
 ├─────────────────────────────────────────┤
-│ Trạng thái:                             │
-│ ( ) Online   (x) Bận   ( ) Đi vắng      │
+│ ⚙️ Cài đặt chung                        │
+│ 🔔 Thông báo & Âm thanh                 │
+│ 🔒 Quyền riêng tư & Bảo mật             │
+│ 🎨 Giao diện (Sáng/Tối)                 │
+│ 💾 Dữ liệu & Lưu trữ (Xóa cache)        │
+│ 💻 Thiết bị đang đăng nhập (3)          │
 ├─────────────────────────────────────────┤
-│ ⚙️ Cài đặt ứng dụng                      │
-│ - 🔔 Thông báo (Bật)                     │
-│ - 🌙 Giao diện tối (Tự động)             │
-│ - 🔒 Quyền riêng tư & Bảo mật            │
+│ [ Đăng xuất ]                           │
 ├─────────────────────────────────────────┤
-│ [     Đăng xuất khỏi thiết bị này     ] │
+│   💬         👥         👤              │
 └─────────────────────────────────────────┘
 ```
 </details>
 
 #### B. Cấu trúc Layout & Components (Anatomy)
-- **Header:** Nút Back + Tiêu đề.
-- **Body/Main Content:**
-  - Avatar, Họ tên, Chức vụ, Email công ty, Số điện thoại.
-  - Quản lý trực tiếp (Manager) & Phòng ban trực thuộc.
-  - Radio buttons/Dropdown chọn trạng thái hoạt động (Presence).
-  - List menu cài đặt: Thông báo (push/email), Giao diện (Dark/Light mode), Bảo mật (Đổi mã PIN/FaceID).
-- **Footer:** Nút Đăng xuất màu đỏ.
+- **Header:** Tiêu đề "Cá nhân".
+- **Khối Thông tin (Profile):** Avatar, Tên, Chức vụ. Nút chỉnh sửa trạng thái tùy chỉnh (Custom Status) kèm Emoji, có thể hẹn giờ tự động xóa trạng thái (Sau 1 ngày, 1 tuần).
+- **Khối Menu Cài đặt (Settings):**
+  - **Thông báo:** Bật/tắt thông báo rung, chuông báo, nhắc tên @.
+  - **Quyền riêng tư (Privacy):** Tùy chọn ẩn "Lần cuối hoạt động", ẩn Số điện thoại.
+  - **Giao diện (Theme):** Light Mode / Dark Mode / Theo hệ thống.
+  - **Lưu trữ:** Công cụ quản lý dung lượng, tự động xóa bộ nhớ đệm (Clear Cache).
+  - **Thiết bị (Sessions):** Xem danh sách máy tính, điện thoại đang đăng nhập. Nút "Đăng xuất tất cả thiết bị khác" (Force Logout).
+- **Footer:** Bottom Navigation Bar (`Tin nhắn | Danh bạ | Cá nhân`).
 
 #### C. Component & Data
 | Component | Loại | Mô tả dữ liệu / Logic | Ràng buộc (Validation) |
 |-----------|------|------------------------|-----------------------|
-| Trạng thái | Radio/Select | Đồng bộ trạng thái hiện diện (Presence) tới tất cả người dùng khác realtime. | Các trạng thái tự động reset về Online vào đầu giờ làm việc hôm sau (tùy chọn). |
-| Nút Đăng xuất | Destructive CTA | Xóa toàn bộ token phiên đăng nhập, xóa cache nội dung chat offline để bảo mật. | Yêu cầu xác nhận 2 lần trước khi đăng xuất. |
+| Custom Status | Input/Emoji | Trạng thái hiển thị cạnh tên ở mọi nơi trong app. | Tối đa 50 ký tự. Hỗ trợ hẹn giờ tự tắt. |
+| Devices/Sessions| List | Danh sách Token/Thiết bị hiện thời. | Yêu cầu nhập lại mật khẩu nếu muốn đăng xuất máy khác. |
+| Clear Cache | Action Button | Xóa tệp tải về cục bộ để giải phóng bộ nhớ thiết bị. | Cảnh báo trước khi xóa. |
 
 ---
 
-### Screen 8: Bảng Điều Khiển Quản Trị & Audit Log (Admin Panel)
-**Mục đích:** Đảm bảo tính kiểm soát, tuân thủ chính sách và bảo mật dữ liệu doanh nghiệp (Đặc thù nội bộ).
+### Screen 8: Bảng điều khiển Quản trị (Admin Panel)
+**Mục đích:** Dành riêng cho cấp Quản lý hệ thống (Super Admin) để thanh tra, cấu hình bảo mật toàn cục.
 
 #### A. Phác họa Giao diện (Wireframe - Visual Sequence)
 <details>
-<summary>🖥️ Bảng quản trị <code>admin-panel</code></summary>
-
-**Mô tả:** Bản thiết kế giao diện rộng (Desktop/Web) cho Admin theo dõi danh sách Audit Log, lọc hành động, địa chỉ IP và trạng thái phiên làm việc.
+<summary>💻 Admin Dashboard <code>admin-panel</code></summary>
 
 ```text
-┌─────────────────────────────────────────┐
-│ Bảng điều khiển Admin - Audit Log [Web] │
-├─────────────────────────────────────────┤
-│ [👤 User] [👥 Groups] [📋 Logs] [⚙️ Config]│
-├─────────────────────────────────────────┤
-│ Bộ lọc: [Hành động v] [Nhân viên v]     │
-├─────────────────────────────────────────┤
-│ Thời gian | Nhân viên | Hành động | IP  │
-├───────────┼───────────┼───────────┼─────┤
-│ 10:14:15  │ Admin     │ Lock user │ 1.1 │
-├───────────┼───────────┼───────────┼─────┤
-│ 10:12:00  │ N.V. A    │ Login     │ 2.3 │
-├───────────┼───────────┼───────────┼─────┤
-│ 09:45:10  │ L.T. B    │ Edit msg  │ 4.5 │
-└───────────┴───────────┴───────────┴─────┘
+┌────────────────────────────────────────────────────────┐
+│ 🛡️ Bảng điều khiển Quản trị Hệ thống                  │
+├─────────┬──────────────────────────────────────────────┤
+│ 👤 Users│ 📊 Thống kê Hệ thống                         │
+│ 🏢 Nhóm │ - Tổng User: 1,200 | Online: 450             │
+│ ⚙️ Conf │ - Dung lượng lưu trữ: 1.5 TB                 │
+│ 📝 Audit├──────────────────────────────────────────────┤
+│ 📢 B.ast│ 📝 Nhật ký truy cập (Audit Logs)             │
+│         │ [ Tìm kiếm ID/Tên... ] [ Tải file CSV ⬇️ ]    │
+│         │ 10:25 - [NV01] đăng nhập từ IP 192.168.x     │
+│         │ 10:15 - [NV05] xóa nhóm "Báo cáo Mật"        │
+│         │ 09:30 - [Ad01] thay đổi quyền NV02           │
+│         ├──────────────────────────────────────────────┤
+│         │ 📢 Thông báo toàn hệ thống (Broadcast)       │
+│         │ [ Nhập thông báo khẩn cấp...           ] [Gửi]│
+└─────────┴──────────────────────────────────────────────┘
 ```
 </details>
 
 #### B. Cấu trúc Layout & Components (Anatomy)
-- **Side Navigation (Bản Web/Desktop):** Người dùng | Nhóm & Kênh | Quyền hạn & Phân vai (RBAC) | Nhật ký hệ thống (Audit Log) | Cấu hình bảo mật.
-- **Body/Main Content:**
-  - Bảng hiển thị danh sách chi tiết (ví dụ: Danh sách Audit Log).
-  - Các bộ lọc nâng cao (Tìm theo thời gian, theo hành động: Gửi/Xóa/Sửa/Đăng nhập, theo nhân viên).
-  - Khối thông tin chi tiết của hành động được chọn (Thiết bị, IP, tọa độ, hành động cụ thể).
-- **Header/Footer:** Tên phiên quản trị, nút Đăng xuất an toàn.
+- **Menu Sidebar (Trái):** Quản lý Users, Nhóm, Cấu hình, Nhật ký (Audit Logs), Gửi thông báo (Broadcast).
+- **Body (Phải):**
+  - **Dashboard:** Thống kê lượng user online, dung lượng lưu trữ server.
+  - **Audit Logs:** Ghi nhận mọi sự kiện quan trọng (Đăng nhập, Xóa dữ liệu, Thay đổi quyền). Có bộ lọc thời gian và nút Xuất dữ liệu (Export to CSV).
+  - **Role-based Access (RBAC):** Giao diện gán quyền hệ thống cho từng cá nhân.
+  - **Broadcast System:** Nút cho phép Admin gửi thông báo khẩn cấp đẩy push notification tới mọi thiết bị của toàn bộ nhân viên công ty.
+  - **Device Management:** Theo dõi và Forced Logout (Buộc đăng xuất) tài khoản của nhân viên từ xa khi có rủi ro bảo mật.
 
 #### C. Component & Data
 | Component | Loại | Mô tả dữ liệu / Logic | Ràng buộc (Validation) |
 |-----------|------|------------------------|-----------------------|
-| Bảng dữ liệu log | Data Table | Liệt kê các bản ghi lịch sử tương tác. Không cho phép sửa hay xóa bản ghi log dưới bất kỳ hình thức nào. | Sắp xếp giảm dần theo thời gian (mới nhất lên đầu). |
-| Công cụ Lọc dữ liệu | Filter Group | Lọc log theo Loại hành động, Người thực hiện, Khoảng thời gian. | Thời gian lọc tối đa 90 ngày mỗi lượt để tối ưu hiệu năng. |
-| Nút "Khóa tài khoản" | Secondary CTA | Cho phép Admin vô hiệu hóa tài khoản nhân viên ngay lập tức (khi nghỉ việc hoặc nghi ngờ lộ thông tin). | Yêu cầu Admin xác nhận mật khẩu trước khi khóa. |
-
-#### D. Trạng thái giao diện (UI States)
-- ⚪ **Empty State:** Kết quả lọc không có bản ghi nào phù hợp. Hiển thị text: *"Không tìm thấy nhật ký tương ứng với bộ lọc."*
-- 🔄 **Loading State:** Hàng đợi tải dữ liệu lớn hiển thị thanh tiến trình (progress bar).
-- 🔴 **Error State:** Lỗi truy vấn dữ liệu log: Hiển thị thông báo đỏ ở góc: *"Lỗi kết nối cơ sở dữ liệu nhật ký. Vui lòng kiểm tra lại cấu hình."*
-- 🟢 **Success State:** Vô hiệu hóa tài khoản thành công, hệ thống lập tức ngắt toàn bộ phiên kết nối (WebSocket) đang hoạt động của tài khoản đó.
-
-#### E. Copywriting (Microcopy)
-- Table Columns: `Thời gian` | `Nhân viên` | `Hành động` | `Thiết bị` | `IP`
-- Notification: `Tài khoản [Tên] đã bị khóa thành công và đăng xuất khỏi toàn bộ thiết bị.`
-
----
+| Audit Log Table | Data Table | Lưu trữ hành vi người dùng, thao tác nhạy cảm. | Chỉ xem (Read-only), không cho phép xóa log. |
+| Export Button | Action | Trích xuất log ra tệp `.csv` hoặc `.xlsx`. | Yêu cầu xác thực OTP của Admin. |
+| Broadcast Input | Form | Gửi thông báo khẩn cấp (vd: "Server bảo trì lúc 12h"). | Chỉ Super Admin mới có quyền này. |
 
 
 ## 3. Tổng Hợp Các Màn Hình (Screens Overview)
