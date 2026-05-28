@@ -309,19 +309,38 @@
 <ul>
 <li><strong>Header:</strong><ul>
 <li>Nút Back.</li>
-<li>Tên đối phương / Tên nhóm + Subtitle trạng thái (Online / Số thành viên online / &quot;đang nhập...&quot;).</li>
-<li>Icon Thư viện Media/Tệp chia sẻ.</li>
+<li>Avatar Cá nhân / Nhóm (Hình tròn, kích thước tiêu chuẩn. Đối với nhóm chưa cài ảnh, hiển thị avatar ghép từ các thành viên).</li>
+<li>Tên đối phương / Tên nhóm hiển thị nổi bật + Subtitle trạng thái (Online / Lần cuối hoạt động / Số thành viên / &quot;đang nhập...&quot;).</li>
+<li>Các nút tính năng (Gọi thoại, Gọi video) và Icon Menu mở rộng [⚙️]/Thư viện Media.</li>
 </ul>
 </li>
 <li><strong>Body/Main Content:</strong><ul>
-<li>Khung cuộn nội dung tin nhắn. Tin nhắn chia thành bong bóng trái (đối phương) và phải (bản thân).</li>
-<li>Phân loại hiển thị đặc biệt cho: tin nhắn đính kèm file, tin nhắn thoại, tin nhắn yêu cầu phê duyệt (có nút tương tác).</li>
+<li>Khung cuộn nội dung tin nhắn. Bong bóng trái (đối phương) và phải (bản thân).</li>
+<li>Avatar và Tên người gửi: Luôn hiển thị cạnh bong bóng chat của người khác (đặc biệt quan trọng trong chat nhóm).</li>
+<li>Phân loại hiển thị đa phương tiện:<ul>
+<li>Text thông thường (Rich text, link preview).</li>
+<li>Sticker tĩnh/động, Emoji kích thước lớn (nếu chỉ gửi 1 emoji duy nhất không kèm text).</li>
+<li>Đoạn hội thoại đính kèm GIF (tự động lặp lại - autoplay).</li>
+<li>Tin nhắn thoại (Voice message với waveform).</li>
+</ul>
+</li>
+<li><strong>Context Menu (Khi chuột phải hoặc Nhấn giữ tin nhắn):</strong><ul>
+<li>Trả lời (Reply)</li>
+<li>Chuyển tiếp (Forward)</li>
+<li>Ghim (Pin)</li>
+<li>Sao chép (Copy text / link)</li>
+<li>Chọn nhiều tin nhắn (Select)</li>
+<li>Dịch tự động (Translate)</li>
+<li>Chỉnh sửa (Edit - giới hạn thời gian/quyền)</li>
+<li>Thu hồi / Xóa (Delete/Unsend)</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><strong>Footer/Input Area:</strong><ul>
-<li>Icon đính kèm tệp (kèm popover chọn: Ảnh, File tài liệu).</li>
-<li>Ô nhập văn bản (tự động giãn dòng theo nội dung).</li>
-<li>Icon Emoji/Stickers.</li>
+<li>Icon đính kèm tệp (Tệp tài liệu, Ảnh/Video từ thư viện).</li>
+<li>Icon Stickers/GIFs/Emojis (Mở ra một panel tổng hợp cho phép chọn nhanh các nội dung hình ảnh biểu cảm).</li>
+<li>Ô nhập văn bản (tự động giãn dòng theo nội dung, hỗ trợ @mention).</li>
 <li>Nút Primary CTA &quot;Gửi&quot; (hoặc icon Micro để ghi âm nếu ô nhập trống).</li>
 </ul>
 </li>
@@ -337,15 +356,39 @@
 </tr>
 </thead>
 <tbody><tr>
+<td>Avatar</td>
+<td>Image/Badge</td>
+<td>Hình ảnh đại diện cá nhân hoặc nhóm (ghép từ nhiều user avatar nếu không có ảnh gốc).</td>
+<td>Tỷ lệ 1:1, bo tròn. Kích thước 40px ở Header, 32px ở cạnh tin nhắn.</td>
+</tr>
+<tr>
+<td>Group/User Name</td>
+<td>Typography</td>
+<td>Tên định danh của người chat hoặc nhóm.</td>
+<td>Cắt chữ (truncate) <code>...</code> nếu vượt quá không gian hiển thị của màn hình.</td>
+</tr>
+<tr>
 <td>Tin nhắn văn bản</td>
 <td>Rich Text Bubble</td>
-<td>Hiển thị chữ kèm định dạng. Nhấp đúp hoặc nhấn giữ để hiện menu: Reply, Forward, Sửa (trong 24h), Thu hồi, React.</td>
+<td>Hiển thị chữ, @mention, inline-link preview.</td>
 <td>Tối đa 4000 ký tự mỗi tin.</td>
+</tr>
+<tr>
+<td>Context Menu (Menu Tương tác)</td>
+<td>Dropdown/Modal</td>
+<td>Chuột phải/Long press vào tin nhắn để mở menu (Reply, Forward, Pin, Copy, Edit, Delete, Translate).</td>
+<td>Edit/Delete chỉ dành cho tin nhắn của chính mình hoặc role Admin nhóm.</td>
+</tr>
+<tr>
+<td>Stickers / Emojis / GIFs</td>
+<td>Rich Media</td>
+<td>Tích hợp hệ thống Emojis chuẩn, bảng Sticker tĩnh/động nội bộ, và công cụ tìm kiếm GIF trực tuyến.</td>
+<td>Emoji lớn khi gửi độc lập. GIF tự động phát (có thể tắt trong cài đặt).</td>
 </tr>
 <tr>
 <td>Đính kèm file</td>
 <td>File Upload</td>
-<td>Cho phép chọn gửi hình ảnh hoặc tệp tài liệu.</td>
+<td>Gửi hình ảnh, video ngắn hoặc tệp tài liệu.</td>
 <td>Giới hạn tối đa 50MB/file. Chỉ cho phép các định dạng an toàn (PDF, DOCX, XLSX, PPTX, ZIP, PNG, JPG).</td>
 </tr>
 <tr>
@@ -364,9 +407,10 @@
 </ul>
 <h4 id="e-copywriting-microcopy">E. Copywriting (Microcopy)</h4>
 <ul>
-<li>Input Placeholder: <code>Nhập tin nhắn...</code></li>
+<li>Input Placeholder: <code>Tin nhắn...</code> hoặc <code>Nhập tin nhắn...</code></li>
 <li>System notification: <code>[Tên] đã tham gia nhóm bằng mã QR.</code></li>
-<li>Action Menu: <code>Trả lời</code> | <code>Chuyển tiếp</code> | <code>Thu hồi</code> | <code>Chỉnh sửa</code></li>
+<li>Context Menu: <code>Trả lời</code> | <code>Chuyển tiếp</code> | <code>Ghim</code> | <code>Sao chép</code> | <code>Chỉnh sửa</code> | <code>Thu hồi</code> | <code>Xóa cho tôi</code> | <code>Dịch</code></li>
+<li>Typing Indicator: <code>[Tên] đang nhập tin nhắn...</code> / <code>[Tên] đang gửi một hình ảnh...</code></li>
 </ul>
 <hr>
 <h3 id="screen-4-man-hinh-quan-ly-nhom-phan-quyen-group-settings-admin">Screen 4: Màn hình Quản lý Nhóm & Phân quyền (Group Settings & Admin)</h3>
