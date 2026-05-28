@@ -338,10 +338,17 @@
 </ul>
 </li>
 <li><strong>Footer/Input Area:</strong><ul>
-<li>Icon đính kèm tệp (Tệp tài liệu, Ảnh/Video từ thư viện).</li>
-<li>Icon Stickers/GIFs/Emojis (Mở ra một panel tổng hợp cho phép chọn nhanh các nội dung hình ảnh biểu cảm).</li>
-<li>Ô nhập văn bản (tự động giãn dòng theo nội dung, hỗ trợ @mention).</li>
-<li>Nút Primary CTA &quot;Gửi&quot; (hoặc icon Micro để ghi âm nếu ô nhập trống).</li>
+<li>Nút Đính kèm <code>[+]</code> (Mở rộng menu Menu Attachment kiểu lưới):<ul>
+<li>📷 Ảnh/Video (Từ thư viện hoặc Camera).</li>
+<li>📁 Tệp tài liệu (File).</li>
+<li>📊 Bình chọn (Poll/Quiz).</li>
+<li>📍 Vị trí (Location / Live Location).</li>
+<li>👤 Liên hệ (Contact).</li>
+</ul>
+</li>
+<li>Icon Stickers/GIFs/Emojis (Panel tương tác chọn biểu cảm/ảnh động).</li>
+<li>Ô nhập văn bản (Giãn dòng tự động, @mention). <strong>Nhấn giữ nút Gửi</strong> để mở tuỳ chọn nâng cao: &quot;Gửi hẹn giờ&quot; (Schedule message) hoặc &quot;Gửi không thông báo&quot; (Silent message).</li>
+<li>Nút Primary CTA &quot;Gửi&quot; (Sẽ chuyển thành icon Micro 🎙️ để ghi âm hoặc icon Camera 📷 tròn để quay video message ngắn khi ô nhập liệu trống).</li>
 </ul>
 </li>
 </ul>
@@ -370,7 +377,7 @@
 <tr>
 <td>Tin nhắn văn bản</td>
 <td>Rich Text Bubble</td>
-<td>Hiển thị chữ, @mention, inline-link preview.</td>
+<td>Hiển thị chữ, @mention, inline-link preview. Hỗ trợ định dạng văn bản (Bold, Italic, Strikethrough, Monospace, <strong>Spoiler</strong> làm mờ chữ). Cho phép thả <strong>Reaction</strong> bằng emoji trực tiếp.</td>
 <td>Tối đa 4000 ký tự mỗi tin.</td>
 </tr>
 <tr>
@@ -380,16 +387,40 @@
 <td>Edit/Delete chỉ dành cho tin nhắn của chính mình hoặc role Admin nhóm.</td>
 </tr>
 <tr>
+<td>Đính kèm file &amp; Media</td>
+<td>File Upload</td>
+<td>Gửi hình ảnh (cho phép gom nhóm thành Album), video, tệp tài liệu nguyên bản không giảm dung lượng.</td>
+<td>Giới hạn tối đa 50MB/file (hoặc tuỳ server).</td>
+</tr>
+<tr>
+<td>Bình chọn (Poll)</td>
+<td>Interactive Element</td>
+<td>Form khảo sát trực tiếp trong chat. Hỗ trợ các chế độ: Ẩn danh (Anonymous), Đa lựa chọn (Multiple answers), Chế độ đố vui (Quiz mode).</td>
+<td>Tối đa 10 lựa chọn mỗi Poll.</td>
+</tr>
+<tr>
+<td>Vị trí (Location)</td>
+<td>Maps UI</td>
+<td>Gửi bản đồ tĩnh có ghim vị trí hoặc Chia sẻ vị trí trực tiếp (Live Location) chạy theo thời gian thực (15 phút, 1 giờ, 8 giờ).</td>
+<td>Yêu cầu cấp quyền truy cập GPS của thiết bị.</td>
+</tr>
+<tr>
+<td>Liên hệ (Contact)</td>
+<td>VCard</td>
+<td>Gửi thẻ định danh của nhân viên khác để truy cập nhanh vào hồ sơ (Profile) của họ.</td>
+<td>Chỉ gửi được user nội bộ.</td>
+</tr>
+<tr>
+<td>Tin nhắn thoại / Video</td>
+<td>Audio/Video UI</td>
+<td>Nhấn giữ icon micro để ghi âm (Voice message hiển thị waveform), hoặc nhấn giữ icon camera để quay video tin nhắn hình tròn (đặc trưng của Telegram).</td>
+<td>Tối đa 5 phút/tin. Hỗ trợ nghe nhanh x1.5, x2.</td>
+</tr>
+<tr>
 <td>Stickers / Emojis / GIFs</td>
 <td>Rich Media</td>
 <td>Tích hợp hệ thống Emojis chuẩn, bảng Sticker tĩnh/động nội bộ, và công cụ tìm kiếm GIF trực tuyến.</td>
-<td>Emoji lớn khi gửi độc lập. GIF tự động phát (có thể tắt trong cài đặt).</td>
-</tr>
-<tr>
-<td>Đính kèm file</td>
-<td>File Upload</td>
-<td>Gửi hình ảnh, video ngắn hoặc tệp tài liệu.</td>
-<td>Giới hạn tối đa 50MB/file. Chỉ cho phép các định dạng an toàn (PDF, DOCX, XLSX, PPTX, ZIP, PNG, JPG).</td>
+<td>Emoji lớn khi gửi độc lập. GIF tự động phát (có thể tắt).</td>
 </tr>
 <tr>
 <td>Menu Tin nhắn AI</td>
