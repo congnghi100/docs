@@ -27,7 +27,7 @@
 <details>
 <summary>📱 Đăng nhập <code>auth-login</code></summary>
 
-**Mô tả:** Màn hình đăng nhập bằng số điện thoại công ty cấp và nhập mã OTP 6 số gửi về thiết bị để xác thực.
+**Mô tả:** Màn hình đăng nhập bằng số điện thoại đã đăng ký trong hồ sơ nhân viên và nhập mã OTP 6 số gửi về thiết bị để xác thực.
 
 ```text
 ┌─────────────────────────────────────────┐
