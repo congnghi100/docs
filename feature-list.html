@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Danh sách chức năng dự án</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue:       #0068ff;
+      --blue-dark:  #0054cc;
+      --blue-light: #e8f0ff;
+      --green:      #10b981;
+      --green-light:#d1fae5;
+      --red:        #ef4444;
+      --red-light:  #fee2e2;
+      --amber:      #f59e0b;
+      --amber-light:#fef3c7;
+      --gray-50:    #f7f8fa;
+      --gray-100:   #f0f2f5;
+      --gray-200:   #e4e6ea;
+      --gray-400:   #9ca3af;
+      --gray-500:   #6b7280;
+      --gray-700:   #374151;
+      --gray-900:   #111827;
+      --white:      #ffffff;
+      --radius-sm:  6px;
+      --radius-md:  12px;
+      --radius-lg:  16px;
+      --shadow:     0 2px 16px rgba(0,0,0,0.08);
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-900);
+      min-height: 100vh;
+    }
+
+    /* TOPBAR */
+    .topbar {
+      background: white;
+      border-bottom: 1px solid var(--gray-200);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      gap: 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--blue);
+      text-decoration: none;
+    }
+    .topbar-logo span { color: var(--gray-900); }
+    .topbar-title {
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+    .topbar-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .search-wrap {
+      position: relative;
+    }
+    .search-wrap svg {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-400);
+      pointer-events: none;
+    }
+    .search-input {
+      padding: 7px 12px 7px 32px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      outline: none;
+      width: 220px;
+      color: var(--gray-700);
+      transition: border-color .15s;
+    }
+    .search-input:focus { border-color: var(--blue); }
+    .filter-btn {
+      padding: 7px 14px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      background: white;
+      font-size: 13px;
+      cursor: pointer;
+      color: var(--gray-700);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background .15s;
+    }
+    .filter-btn:hover { background: var(--gray-100); }
+    .filter-btn.active { background: var(--blue-light); color: var(--blue); border-color: var(--blue); }
+
+    /* MAIN */
+    .main { max-width: 1100px; margin: 0 auto; padding: 32px 24px 60px; }
+
+    /* HEADER */
+    .page-header { margin-bottom: 28px; }
+    .page-title { font-size: 26px; font-weight: 700; letter-spacing: -.4px; margin-bottom: 6px; }
+    .page-subtitle { font-size: 14px; color: var(--gray-500); }
+
+    /* STAT CARDS */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 700px) { .stat-row { grid-template-columns: 1fr 1fr; } }
+    .stat-card {
+      background: white;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .stat-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .stat-icon.green  { background: var(--green-light); }
+    .stat-icon.blue   { background: var(--blue-light); }
+    .stat-icon.red    { background: var(--red-light); }
+    .stat-icon.amber  { background: var(--amber-light); }
+    .stat-info { flex: 1; }
+    .stat-num  { font-size: 24px; font-weight: 700; line-height: 1; margin-bottom: 3px; }
+    .stat-num.green { color: var(--green); }
+    .stat-num.blue  { color: var(--blue); }
+    .stat-num.red   { color: var(--red); }
+    .stat-num.amber { color: var(--amber); }
+    .stat-lbl  { font-size: 12px; color: var(--gray-500); }
+
+    /* PROGRESS BAR */
+    .progress-card {
+      background: white;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow);
+      padding: 20px 24px;
+      margin-bottom: 28px;
+    }
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .progress-label { font-size: 14px; font-weight: 600; }
+    .progress-pct   { font-size: 14px; font-weight: 700; color: var(--green); }
+    .progress-track {
+      height: 10px;
+      background: var(--gray-100);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--green), #34d399);
+      border-radius: 100px;
+      transition: width 1s ease;
+    }
+
+    /* SECTION */
+    .section { margin-bottom: 24px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 20px;
+      background: white;
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      user-select: none;
+      transition: background .15s;
+    }
+    .section-header:hover { background: var(--gray-50); }
+    .section-icon { font-size: 20px; }
+    .section-name { font-size: 15px; font-weight: 700; flex: 1; }
+    .section-count {
+      font-size: 12px;
+      background: var(--green-light);
+      color: var(--green);
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 100px;
+    }
+    .section-chevron {
+      color: var(--gray-400);
+      font-size: 13px;
+      transition: transform .2s;
+    }
+    .section-header.collapsed .section-chevron { transform: rotate(-90deg); }
+
+    .section-body {
+      background: white;
+      border-top: 1px solid var(--gray-100);
+      border-radius: 0 0 var(--radius-md) var(--radius-md);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .section-body.hidden { display: none; }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 11px 20px;
+      border-bottom: 1px solid var(--gray-100);
+      transition: background .12s;
+    }
+    .feature-item:last-child { border-bottom: none; }
+    .feature-item:hover { background: var(--gray-50); }
+    .feature-item.hidden-item { display: none; }
+
+    .check-icon {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: var(--green);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .check-icon svg { color: white; }
+    .feature-text { font-size: 14px; color: var(--gray-700); line-height: 1.4; }
+
+    /* NOT IMPLEMENTED TABLE */
+    .not-impl-card {
+      background: white;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .not-impl-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .not-impl-title { font-size: 15px; font-weight: 700; flex: 1; }
+    .badge-red {
+      background: var(--red-light);
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 100px;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    thead tr { background: var(--gray-50); }
+    th {
+      text-align: left;
+      padding: 10px 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    td { padding: 12px 20px; border-bottom: 1px solid var(--gray-100); font-size: 14px; color: var(--gray-700); vertical-align: top; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: var(--gray-50); }
+    .td-feature { font-weight: 500; }
+    .td-reason { color: var(--gray-500); font-size: 13px; }
+    .x-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--red-light); color: var(--red); font-size: 11px; font-weight: 700;
+    }
+
+    /* EMPTY STATE */
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--gray-400);
+      font-size: 14px;
+    }
+    .empty-state div { font-size: 32px; margin-bottom: 10px; }
+
+    @media (max-width: 640px) {
+      .topbar { padding: 0 16px; }
+      .main { padding: 20px 14px 40px; }
+      .search-input { width: 160px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <a href="#" class="topbar-logo">Mini<span>App</span></a>
+  <span class="topbar-title">/ Danh sách chức năng</span>
+  <div class="topbar-right">
+    <div class="search-wrap">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input class="search-input" type="text" id="search" placeholder="Tìm chức năng..." oninput="doSearch()" />
+    </div>
+    <button class="filter-btn" id="filter-done" onclick="toggleFilter('done')">✅ Đã implement</button>
+    <button class="filter-btn" id="filter-todo" onclick="toggleFilter('todo')">❌ Chưa implement</button>
+  </div>
+</header>
+
+<div class="main">
+  <!-- HEADER -->
+  <div class="page-header">
+    <h1 class="page-title">Danh sách chức năng dự án</h1>
+    <p class="page-subtitle">Tổng hợp các chức năng đã và chưa được implement trong hệ thống</p>
+  </div>
+
+  <!-- STATS -->
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-icon green">✅</div>
+      <div class="stat-info">
+        <div class="stat-num green" id="total-done">0</div>
+        <div class="stat-lbl">Đã implement</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon red">❌</div>
+      <div class="stat-info">
+        <div class="stat-num red">5</div>
+        <div class="stat-lbl">Chưa implement</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon blue">📦</div>
+      <div class="stat-info">
+        <div class="stat-num blue" id="total-cat">0</div>
+        <div class="stat-lbl">Nhóm chức năng</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURE SECTIONS -->
+  <div id="sections-container"></div>
+
+  <!-- NOT IMPLEMENTED -->
+  <div class="section" id="not-impl-section">
+    <div class="not-impl-card">
+      <div class="not-impl-header">
+        <span style="font-size:20px">❌</span>
+        <span class="not-impl-title">Chưa implement</span>
+        <span class="badge-red">5 chức năng</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:40px"></th>
+            <th>Chức năng</th>
+            <th>Lý do</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="x-icon">✕</span></td>
+            <td class="td-feature">Fetch all stories</td>
+            <td class="td-reason">Backend standalone không hỗ trợ</td>
+          </tr>
+          <tr>
+            <td><span class="x-icon">✕</span></td>
+            <td class="td-feature">Top peers</td>
+            <td class="td-reason">Không cần thiết</td>
+          </tr>
+          <tr>
+            <td><span class="x-icon">✕</span></td>
+            <td class="td-feature">Paid reaction privacy</td>
+            <td class="td-reason">Consumer tự ignore</td>
+          </tr>
+          <tr>
+            <td><span class="x-icon">✕</span></td>
+            <td class="td-feature">Quick replies fetch</td>
+            <td class="td-reason">Chưa build</td>
+          </tr>
+          <tr>
+            <td><span class="x-icon">✕</span></td>
+            <td class="td-feature">AI compose / message summary / tone example</td>
+            <td class="td-reason">Cần LLM provider bên ngoài</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- EMPTY STATE -->
+  <div class="empty-state" id="empty-state" style="display:none">
+    <div>🔍</div>
+    Không tìm thấy chức năng nào khớp
+  </div>
+</div>
+
+<script>
+const DATA = [
+  {
+    icon: '🔐', name: 'Xác thực', features: [
+      'Đăng nhập QR code',
+      'Đăng nhập Passkey',
+      'Đăng nhập Phone/Password',
+    ]
+  },
+  {
+    icon: '👤', name: 'Hồ sơ cá nhân', features: [
+      'Xem thông tin user',
+      'Cập nhật tên, bio, username, birthday, emoji status',
+      'Upload / xóa ảnh đại diện',
+      'Upload ảnh đại diện cho contact',
+      'Sắp xếp / toggle usernames',
+      'Quản lý close friends',
+    ]
+  },
+  {
+    icon: '💬', name: 'Tin nhắn', features: [
+      'Gửi / chỉnh sửa / xóa tin nhắn',
+      'Forward tin nhắn',
+      'Pin / unpin tin nhắn',
+      'Lên lịch gửi tin nhắn (scheduled)',
+      'Draft tin nhắn',
+      'Tìm kiếm trong chat / toàn cục / public posts',
+      'Dịch tin nhắn',
+      'Transcript audio',
+      'Xem webpage preview',
+      'Đọc mention / reaction / unread',
+      'Quick replies',
+    ]
+  },
+  {
+    icon: '📊', name: 'Poll & Todo', features: [
+      'Vote / close poll',
+      'Xem kết quả poll theo lựa chọn',
+      'Thêm / sửa / toggle todo item',
+    ]
+  },
+  {
+    icon: '👥', name: 'Nhóm & Kênh', features: [
+      'Tạo group / channel',
+      'Join / leave nhóm',
+      'Migrate group → channel',
+      'Quản lý thành viên (add, ban, set quyền admin)',
+      'Invite link (tạo, sửa, xóa, kiểm tra, join)',
+      'Join request (duyệt / từ chối tất cả)',
+      'Discussion group, signed messages',
+      'Hạn chế forward / bảo vệ nội dung',
+      'Transfer quyền owner',
+      'Quản lý username nhóm',
+      'Forum topics (tạo, sửa, xóa, pin, đóng)',
+    ]
+  },
+  {
+    icon: '📋', name: 'Thư mục chat', features: [
+      'Xem / tạo / sửa / xóa / sắp xếp folder',
+      'Folder được đề xuất',
+      'Chatlist invite (tạo, kiểm tra, join, xóa)',
+    ]
+  },
+  {
+    icon: '😀', name: 'Sticker & GIF', features: [
+      'Xem sticker sets, recent, favorite, featured',
+      'Custom emoji sets',
+      'Dice, premium gifts, TON gifts',
+      'Tìm kiếm sticker / GIF',
+      'Lưu GIF, fave sticker',
+      'Cài / gỡ sticker set',
+    ]
+  },
+  {
+    icon: '⭐', name: 'Stars & Thanh toán', features: [
+      'Xem / nạp Stars, lịch sử giao dịch',
+      'Star subscriptions',
+      'Star gifts (xem, lưu, chuyển đổi, nâng cấp, chuyển nhượng)',
+      'Đấu giá gift',
+      'Giveaway (tạo, thông tin, launch)',
+      'Paid messages (giá, doanh thu, exception)',
+      'Rút doanh thu monetization',
+      'Boost (danh sách, apply, trạng thái)',
+      'Gift code (kiểm tra, áp dụng)',
+      'Payment form (validate, gửi, nhận receipt)',
+      'Paid reaction',
+    ]
+  },
+  {
+    icon: '🎥', name: 'Cuộc gọi', features: [
+      'Gọi thoại / video (request, accept, discard)',
+      'Group call (tạo, join, leave, discard)',
+      'Quản lý participants group call',
+      'Chia sẻ màn hình trong group call',
+      'Đánh giá cuộc gọi',
+      'Link mời vào group call',
+    ]
+  },
+  {
+    icon: '📖', name: 'Stories', features: [
+      'Xem stories (tất cả, theo peer, theo ID)',
+      'Đăng / xóa story',
+      'Chỉnh sửa quyền riêng tư story',
+      'Mark đã xem, reaction',
+      'Pin story lên profile',
+      'Stealth mode',
+      'Albums',
+      'Report story',
+      'Toggle ẩn stories',
+    ]
+  },
+  {
+    icon: '📊', name: 'Thống kê', features: [
+      'Thống kê kênh / nhóm / tin nhắn',
+      'Async graph',
+      'Đề xuất kênh / bot liên quan',
+      'Public forwards của tin nhắn',
+    ]
+  },
+  {
+    icon: '😍', name: 'Reactions', features: [
+      'Xem reactions khả dụng, top, recent',
+      'Gửi reaction / emoji interaction',
+      'Saved reaction tags',
+      'Default reaction',
+      'Xem danh sách người react',
+    ]
+  },
+  {
+    icon: '🤖', name: 'Bot & WebView', features: [
+      'Callback button, start bot, bot commands',
+      'Inline bot results',
+      'Web View (main, simple, app)',
+      'Gửi data từ WebView',
+      'Popular app bots',
+      'URL auth',
+    ]
+  },
+  {
+    icon: '🔒', name: 'Bảo mật & Quyền riêng tư', features: [
+      'Xem / kết thúc phiên đăng nhập',
+      'Privacy settings (ai có thể xem gì)',
+      'Block / unblock user',
+      '2FA (check, update, xóa, recovery email)',
+      'Passkey (xem, đăng ký, xóa)',
+      'Web sessions (Telegram Login Widget)',
+    ]
+  },
+  {
+    icon: '⚙️', name: 'Cài đặt tài khoản', features: [
+      'Thông báo (default, per-chat, exceptions)',
+      'Content settings',
+      'Contact signup notification',
+      'Account TTL (tự xóa tài khoản)',
+      'Global privacy settings',
+      'Đăng ký / hủy thiết bị nhận push',
+      'Toggle quảng cáo sponsored',
+      'AI compose tones (xem, tạo, sửa, xóa, lưu)',
+    ]
+  },
+  {
+    icon: '🌐', name: 'Hệ thống', features: [
+      'Danh sách quốc gia + mã điện thoại',
+      'Peer colors',
+      'Localization strings',
+    ]
+  },
+];
+
+/* ── RENDER SECTIONS ── */
+function renderSections(filterText = '', filterMode = null) {
+  const container = document.getElementById('sections-container');
+  const notImpl   = document.getElementById('not-impl-section');
+  const empty     = document.getElementById('empty-state');
+  const q = filterText.toLowerCase();
+
+  let totalDone = 0;
+  let visibleSections = 0;
+  let html = '';
+
+  DATA.forEach((cat, ci) => {
+    const matchedFeatures = cat.features.filter(f =>
+      (!q || f.toLowerCase().includes(q))
+    );
+    if (matchedFeatures.length === 0) return;
+    if (filterMode === 'todo') return; // only show not-impl
+    visibleSections++;
+    totalDone += matchedFeatures.length;
+
+    html += `
+      <div class="section" data-section="${ci}">
+        <div class="section-header" onclick="toggleSection(this)">
+          <span class="section-icon">${cat.icon}</span>
+          <span class="section-name">${cat.name}</span>
+          <span class="section-count">${matchedFeatures.length} chức năng</span>
+          <span class="section-chevron">▼</span>
+        </div>
+        <div class="section-body">
+          ${matchedFeatures.map(f => `
+            <div class="feature-item">
+              <div class="check-icon">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <span class="feature-text">${f}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+
+  // Show/hide not-impl
+  const notImplItems = document.querySelectorAll('#not-impl-section tbody tr');
+  let notImplMatch = 0;
+  notImplItems.forEach(row => {
+    const text = row.querySelector('.td-feature').textContent.toLowerCase();
+    const show = (!q || text.includes(q)) && filterMode !== 'done';
+    row.style.display = show ? '' : 'none';
+    if (show) notImplMatch++;
+  });
+  notImpl.style.display = (filterMode === 'done' || notImplMatch === 0 && filterMode === 'todo' && !q)
+    ? (filterMode === 'done' ? 'none' : '')
+    : '';
+  if (filterMode === 'done') notImpl.style.display = 'none';
+  else notImpl.style.display = '';
+
+  // Empty state
+  const hasContent = visibleSections > 0 || notImplMatch > 0;
+  empty.style.display = hasContent ? 'none' : '';
+
+  // Update stats
+  const TOTAL_FEATURES = DATA.reduce((s, c) => s + c.features.length, 0);
+  const total = TOTAL_FEATURES + 5;
+  const pct = Math.round(TOTAL_FEATURES / total * 100);
+  document.getElementById('total-done').textContent = TOTAL_FEATURES;
+  document.getElementById('total-cat').textContent = DATA.length;
+  document.getElementById('pct-done').textContent = pct + '%';
+  document.getElementById('progress-pct').textContent = pct + '%';
+  setTimeout(() => {
+    document.getElementById('progress-fill').style.width = pct + '%';
+  }, 100);
+}
+
+/* ── COLLAPSE / EXPAND ── */
+function toggleSection(header) {
+  const body = header.nextElementSibling;
+  header.classList.toggle('collapsed');
+  body.classList.toggle('hidden');
+}
+
+/* ── SEARCH ── */
+let activeFilter = null;
+function doSearch() {
+  renderSections(document.getElementById('search').value, activeFilter);
+}
+
+/* ── FILTER TOGGLE ── */
+function toggleFilter(type) {
+  const btn = document.getElementById('filter-' + type);
+  if (activeFilter === type) {
+    activeFilter = null;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  } else {
+    activeFilter = type;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  renderSections(document.getElementById('search').value, activeFilter);
+}
+
+/* ── INIT ── */
+renderSections();
+</script>
+</body>
+</html>

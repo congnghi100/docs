@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CMS Omni Admin — Danh sách chức năng</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue:#0068ff; --blue-dark:#0054cc; --blue-light:#e8f0ff;
+      --green:#10b981; --green-light:#d1fae5;
+      --red:#ef4444; --red-light:#fee2e2;
+      --amber:#f59e0b; --amber-light:#fef3c7;
+      --gray-50:#f7f8fa; --gray-100:#f0f2f5; --gray-200:#e4e6ea;
+      --gray-400:#9ca3af; --gray-500:#6b7280; --gray-700:#374151; --gray-900:#111827;
+      --white:#fff; --radius-sm:6px; --radius-md:12px; --radius-lg:16px;
+      --shadow:0 2px 16px rgba(0,0,0,0.08);
+    }
+    body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:var(--gray-50); color:var(--gray-900); min-height:100vh; }
+
+    .topbar { background:#fff; border-bottom:1px solid var(--gray-200); height:56px; display:flex; align-items:center; padding:0 32px; gap:16px; position:sticky; top:0; z-index:100; }
+    .topbar-logo { font-size:16px; font-weight:700; color:var(--blue); text-decoration:none; }
+    .topbar-logo span { color:var(--gray-900); }
+    .topbar-title { font-size:14px; color:var(--gray-500); }
+    .topbar-right { margin-left:auto; display:flex; align-items:center; gap:10px; }
+    .search-wrap { position:relative; }
+    .search-wrap svg { position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--gray-400); pointer-events:none; }
+    .search-input { padding:7px 12px 7px 32px; border:1.5px solid var(--gray-200); border-radius:var(--radius-sm); font-size:13px; outline:none; width:220px; color:var(--gray-700); transition:border-color .15s; }
+    .search-input:focus { border-color:var(--blue); }
+    .filter-btn { padding:7px 14px; border:1.5px solid var(--gray-200); border-radius:var(--radius-sm); background:#fff; font-size:13px; cursor:pointer; color:var(--gray-700); display:flex; align-items:center; gap:6px; transition:background .15s; }
+    .filter-btn:hover { background:var(--gray-100); }
+    .filter-btn.active { background:var(--blue-light); color:var(--blue); border-color:var(--blue); }
+
+    .main { max-width:1100px; margin:0 auto; padding:32px 24px 60px; }
+    .page-header { margin-bottom:28px; }
+    .page-title { font-size:26px; font-weight:700; letter-spacing:-.4px; margin-bottom:6px; }
+    .page-subtitle { font-size:14px; color:var(--gray-500); }
+
+    .stat-row { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:24px; }
+    @media (max-width:700px){ .stat-row { grid-template-columns:1fr 1fr; } }
+    .stat-card { background:#fff; border-radius:var(--radius-md); box-shadow:var(--shadow); padding:18px 20px; display:flex; align-items:center; gap:14px; }
+    .stat-icon { width:42px; height:42px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+    .stat-icon.green{ background:var(--green-light); } .stat-icon.blue{ background:var(--blue-light); }
+    .stat-icon.red{ background:var(--red-light); } .stat-icon.amber{ background:var(--amber-light); }
+    .stat-info { flex:1; }
+    .stat-num { font-size:24px; font-weight:700; line-height:1; margin-bottom:3px; }
+    .stat-num.green{ color:var(--green); } .stat-num.blue{ color:var(--blue); }
+    .stat-num.red{ color:var(--red); } .stat-num.amber{ color:var(--amber); }
+    .stat-lbl { font-size:12px; color:var(--gray-500); }
+
+    .progress-card { background:#fff; border-radius:var(--radius-md); box-shadow:var(--shadow); padding:20px 24px; margin-bottom:28px; }
+    .progress-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+    .progress-label { font-size:14px; font-weight:600; }
+    .progress-pct { font-size:14px; font-weight:700; color:var(--green); }
+    .progress-track { height:10px; background:var(--gray-100); border-radius:100px; overflow:hidden; }
+    .progress-fill { height:100%; background:linear-gradient(90deg,var(--green),#34d399); border-radius:100px; transition:width 1s ease; }
+
+    .section { margin-bottom:24px; }
+    .section-header { display:flex; align-items:center; gap:10px; padding:14px 20px; background:#fff; border-radius:var(--radius-md) var(--radius-md) 0 0; box-shadow:var(--shadow); cursor:pointer; user-select:none; transition:background .15s; }
+    .section-header:hover { background:var(--gray-50); }
+    .section-icon { font-size:20px; }
+    .section-name { font-size:15px; font-weight:700; flex:1; }
+    .section-perm { font-size:11px; background:var(--blue-light); color:var(--blue); font-weight:600; padding:2px 8px; border-radius:100px; font-family:monospace; }
+    .section-count { font-size:12px; background:var(--green-light); color:var(--green); font-weight:600; padding:2px 10px; border-radius:100px; }
+    .section-chevron { color:var(--gray-400); font-size:13px; transition:transform .2s; }
+    .section-header.collapsed .section-chevron { transform:rotate(-90deg); }
+    .section-body { background:#fff; border-top:1px solid var(--gray-100); border-radius:0 0 var(--radius-md) var(--radius-md); box-shadow:var(--shadow); overflow:hidden; }
+    .section-body.hidden { display:none; }
+    .feature-item { display:flex; align-items:flex-start; gap:12px; padding:11px 20px; border-bottom:1px solid var(--gray-100); transition:background .12s; }
+    .feature-item:last-child { border-bottom:none; }
+    .feature-item:hover { background:var(--gray-50); }
+    .check-icon { width:18px; height:18px; border-radius:50%; background:var(--green); display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
+    .check-icon svg { color:#fff; }
+    .feature-text { font-size:14px; color:var(--gray-700); line-height:1.4; }
+    .feature-text code { background:var(--gray-100); padding:1px 5px; border-radius:4px; font-size:12px; color:var(--gray-700); }
+
+    .not-impl-card { background:#fff; border-radius:var(--radius-md); box-shadow:var(--shadow); overflow:hidden; }
+    .not-impl-header { display:flex; align-items:center; gap:10px; padding:14px 20px; border-bottom:1px solid var(--gray-200); }
+    .not-impl-title { font-size:15px; font-weight:700; flex:1; }
+    .badge-red { background:var(--red-light); color:var(--red); font-size:12px; font-weight:600; padding:2px 10px; border-radius:100px; }
+    .badge-amber { background:var(--amber-light); color:var(--amber); font-size:12px; font-weight:600; padding:2px 10px; border-radius:100px; }
+    table { width:100%; border-collapse:collapse; }
+    thead tr { background:var(--gray-50); }
+    th { text-align:left; padding:10px 20px; font-size:12px; font-weight:600; color:var(--gray-500); text-transform:uppercase; letter-spacing:.5px; border-bottom:1px solid var(--gray-200); }
+    td { padding:12px 20px; border-bottom:1px solid var(--gray-100); font-size:14px; color:var(--gray-700); vertical-align:top; }
+    tbody tr:last-child td { border-bottom:none; }
+    tbody tr:hover td { background:var(--gray-50); }
+    .td-feature { font-weight:500; }
+    .td-reason { color:var(--gray-500); font-size:13px; }
+    .x-icon { display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:50%; background:var(--amber-light); color:var(--amber); font-size:11px; font-weight:700; }
+    .empty-state { text-align:center; padding:48px 20px; color:var(--gray-400); font-size:14px; }
+    .empty-state div { font-size:32px; margin-bottom:10px; }
+    @media (max-width:640px){ .topbar{ padding:0 16px; } .main{ padding:20px 14px 40px; } .search-input{ width:160px; } .section-perm{ display:none; } }
+  </style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="#" class="topbar-logo">Omni<span>Admin</span></a>
+  <span class="topbar-title">/ CMS — Danh sách chức năng</span>
+  <div class="topbar-right">
+    <div class="search-wrap">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input class="search-input" type="text" id="search" placeholder="Tìm chức năng..." oninput="doSearch()" />
+    </div>
+    <button class="filter-btn" id="filter-done" onclick="toggleFilter('done')">✅ Đã có</button>
+    <button class="filter-btn" id="filter-todo" onclick="toggleFilter('todo')">⚠️ Hạn chế</button>
+  </div>
+</header>
+
+<div class="main">
+  <div class="page-header">
+    <h1 class="page-title">CMS Omni Admin — Danh sách chức năng</h1>
+    <p class="page-subtitle">Operations console cho backend chat — tổng hợp năng lực admin theo từng màn hình (đối chiếu code thật + API doc)</p>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-icon green">✅</div>
+      <div class="stat-info"><div class="stat-num green" id="total-done">0</div><div class="stat-lbl">Tính năng admin</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon blue">📦</div>
+      <div class="stat-info"><div class="stat-num blue" id="total-cat">0</div><div class="stat-lbl">Nhóm chức năng</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon amber">🔌</div>
+      <div class="stat-info"><div class="stat-num amber">86</div><div class="stat-lbl">API admin đã nối</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon red">⚠️</div>
+      <div class="stat-info"><div class="stat-num red">5</div><div class="stat-lbl">Hạn chế đã biết</div></div>
+    </div>
+  </div>
+
+  <div class="progress-card">
+    <div class="progress-header">
+      <span class="progress-label">Độ phủ phần admin của backend</span>
+      <span class="progress-pct" id="progress-pct">100%</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0"></div></div>
+  </div>
+
+  <div id="sections-container"></div>
+
+  <div class="section" id="not-impl-section">
+    <div class="not-impl-card">
+      <div class="not-impl-header">
+        <span style="font-size:20px">⚠️</span>
+        <span class="not-impl-title">Hạn chế / chưa hoàn thiện</span>
+        <span class="badge-amber">5 mục</span>
+      </div>
+      <table>
+        <thead><tr><th style="width:40px"></th><th>Hạng mục</th><th>Chi tiết</th></tr></thead>
+        <tbody>
+          <tr><td><span class="x-icon">!</span></td><td class="td-feature">Phân trang danh sách</td><td class="td-reason">Chỉ Users + Audit có phân trang; 16 màn còn lại chỉ xem được trang đầu (backend đã hỗ trợ offset, UI chưa wire)</td></tr>
+          <tr><td><span class="x-icon">!</span></td><td class="td-feature">AdminLog nâng cao</td><td class="td-reason">Endpoint POST /admin-log/get chưa nối; hiện chỉ dùng GET /admin/audit-log</td></tr>
+          <tr><td><span class="x-icon">!</span></td><td class="td-feature">Tải dữ liệu song song chịu lỗi</td><td class="td-reason">1 endpoint lỗi làm trắng cả màn (analytics / economy / stars / entities) — chưa chịu lỗi từng phần</td></tr>
+          <tr><td><span class="x-icon">!</span></td><td class="td-feature">Form Config</td><td class="td-reason">Là editor JSON thô theo key, chưa có form typed / validate kiểu giá trị</td></tr>
+          <tr><td><span class="x-icon">!</span></td><td class="td-feature">Dọn dead code template</td><td class="td-reason">Widget demo Skote + nhánh firebase trong router guard còn sót (không ảnh hưởng vận hành)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="empty-state" id="empty-state" style="display:none"><div>🔍</div>Không tìm thấy chức năng nào khớp</div>
+</div>
+
+<script>
+const DATA = [
+  { icon:'🔐', name:'Xác thực & Phiên admin', perm:'login', features:[
+    'Đăng nhập Phone + OTP (có devOtp ở chế độ dev)',
+    'Đăng nhập QR code (thiết bị Omni đã đăng nhập duyệt quét)',
+    'Đăng nhập Passkey / WebAuthn',
+    'Chặn tài khoản không phải admin (verify qua /admin/health)',
+    'Lưu phiên { token, profile }, tự logout khi 401',
+    'Quản lý passkey của chính operator (xem, đăng ký, xóa)',
+    'Xem hồ sơ bản thân (/auth/me)',
+  ]},
+  { icon:'📊', name:'Dashboard', perm:'admin.read', features:[
+    'Thống kê tổng quan hệ thống (stats)',
+    'Trạng thái health backend',
+    'Biểu đồ phân bố chat theo loại',
+    '10 dòng audit log gần nhất',
+  ]},
+  { icon:'👥', name:'Người dùng / Support', perm:'admin.read', features:[
+    'Tìm kiếm user theo phone / username / tên / email (có phân trang)',
+    'Xem chi tiết user + thông tin bảo mật',
+    'Ban / unban user',
+    'Buộc đăng xuất tất cả phiên (force logout)',
+    'Reset 2FA',
+    'Thu hồi passkey của user',
+    'Thu hồi credential (kèm lý do)',
+    'Xóa trạng thái revocation (clear-revocation)',
+    'Cộng Stars thủ công cho user (kèm lý do)',
+  ]},
+  { icon:'⭐', name:'Stars', perm:'admin.stars', features:[
+    'Xem số dư Stars của user',
+    'Grant Stars (cộng tay + lý do)',
+    'Lịch sử giao dịch Stars (lọc theo user)',
+    'Quản lý Gifts: xem, tạo, sửa',
+    'Gift codes: xem, tạo',
+    'Giveaways: xem, quay thưởng (draw)',
+    'Subscriptions: xem, hủy',
+    'Auctions: xem danh sách, chi tiết, chốt phiên (settle)',
+    'Hoàn Stars (refund) cho user',
+  ]},
+  { icon:'💰', name:'Kinh tế / Paid messages', perm:'admin.stars', features:[
+    'Xem bảng giá tin nhắn trả phí theo owner',
+    'Đặt / sửa giá paid-message',
+  ]},
+  { icon:'💬', name:'Chat & Tin nhắn', perm:'admin.content', features:[
+    'Duyệt danh sách chat',
+    'Xem chi tiết chat + thông tin moderation',
+    'Cấu hình chat: signatures, join-to-send, join-request, ẩn pre-history, cấm forward, ẩn thành viên, forum mode, auto-translation',
+    'Đặt default banned rights cho chat',
+    'Set quyền thành viên (role, rank, adminRights, bannedRights)',
+    'Ban thành viên trong chat',
+    'Duyệt tin nhắn (lọc theo chat / user / nội dung)',
+    'Xem chi tiết tin nhắn (message inspect)',
+    'Xóa / khôi phục tin nhắn',
+  ]},
+  { icon:'🚩', name:'Kiểm duyệt (Reports)', perm:'admin.content', features:[
+    'Xem danh sách báo cáo (lọc theo trạng thái)',
+    'Xem chi tiết báo cáo',
+    'Xử lý báo cáo: resolve / escalate / dismiss',
+    'Flag / bỏ flag user bị báo cáo (kèm lý do)',
+  ]},
+  { icon:'📢', name:'Broadcast', perm:'admin.write', features:[
+    'Gửi broadcast tới tất cả user hoặc nhóm user cụ thể',
+    'Xem lịch sử broadcast',
+  ]},
+  { icon:'📖', name:'Stories', perm:'admin.content', features:[
+    'Xem danh sách stories',
+    'Xem danh sách người đã xem (viewers)',
+    'Gỡ story (take down)',
+  ]},
+  { icon:'🤖', name:'Thực thể (Bots / Stickers / Verify)', perm:'admin.read', features:[
+    'Bots: xem danh sách, tạo bot, tạo lại token',
+    'Sticker sets: xem stickers, tạo set, sửa set',
+    'Gắn tick verify cho chat',
+    'Gắn tick verify cho user',
+  ]},
+  { icon:'📈', name:'Phân tích (Analytics)', perm:'admin.read', features:[
+    'Users daily (người dùng theo ngày)',
+    'Messages daily (tin nhắn theo ngày)',
+    'Stars daily (Stars theo ngày)',
+    'Top chats',
+    'Top users theo Stars',
+    'Top gifts',
+  ]},
+  { icon:'📡', name:'Giám sát realtime (Monitoring)', perm:'admin.read', features:[
+    'User đang online (tổng + mẫu), tự refresh mỗi 15s',
+    'Cuộc gọi đang diễn ra (active calls)',
+    'Lịch sử cuộc gọi (lọc theo user)',
+  ]},
+  { icon:'🛡️', name:'RBAC / Phân quyền', perm:'rbac.read', features:[
+    'Xem danh sách roles',
+    'Xem danh sách permissions',
+    'Tạo / sửa / xóa role',
+    'Gán permissions cho role',
+    'Tìm user và gán / thu hồi role',
+  ]},
+  { icon:'⚙️', name:'Cấu hình app (Config)', perm:'admin.config', features:[
+    'Đọc toàn bộ config key-value của app',
+    'Sửa giá trị config theo key (JSON)',
+  ]},
+  { icon:'🔧', name:'Hệ thống / Ops (Scaffolds)', perm:'admin.config', features:[
+    'Cron jobs: xem, chạy ngay (trigger), đặt lại lịch (reschedule), bật/tắt',
+    'Webhooks: rotate token, deregister',
+  ]},
+  { icon:'📋', name:'Audit log', perm:'admin.read', features:[
+    'Nhật ký mọi thao tác admin',
+    'Tải thêm (load more) theo trang',
+  ]},
+];
+
+function renderSections(filterText='', filterMode=null) {
+  const container = document.getElementById('sections-container');
+  const notImpl = document.getElementById('not-impl-section');
+  const empty = document.getElementById('empty-state');
+  const q = filterText.toLowerCase();
+  let visibleSections = 0, html = '';
+
+  if (filterMode !== 'todo') {
+    DATA.forEach((cat, ci) => {
+      const matched = cat.features.filter(f => !q || f.toLowerCase().includes(q) || cat.name.toLowerCase().includes(q));
+      if (matched.length === 0) return;
+      visibleSections++;
+      html += `
+        <div class="section" data-section="${ci}">
+          <div class="section-header" onclick="toggleSection(this)">
+            <span class="section-icon">${cat.icon}</span>
+            <span class="section-name">${cat.name}</span>
+            <span class="section-perm">${cat.perm}</span>
+            <span class="section-count">${matched.length}</span>
+            <span class="section-chevron">▼</span>
+          </div>
+          <div class="section-body">
+            ${matched.map(f => `
+              <div class="feature-item">
+                <div class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <span class="feature-text">${f}</span>
+              </div>`).join('')}
+          </div>
+        </div>`;
+    });
+  }
+  container.innerHTML = html;
+
+  const rows = document.querySelectorAll('#not-impl-section tbody tr');
+  let notImplMatch = 0;
+  rows.forEach(row => {
+    const text = row.querySelector('.td-feature').textContent.toLowerCase();
+    const show = (!q || text.includes(q)) && filterMode !== 'done';
+    row.style.display = show ? '' : 'none';
+    if (show) notImplMatch++;
+  });
+  notImpl.style.display = (filterMode === 'done' || (q && notImplMatch === 0)) ? 'none' : '';
+
+  empty.style.display = (visibleSections > 0 || notImplMatch > 0) ? 'none' : '';
+
+  const TOTAL = DATA.reduce((s,c)=>s+c.features.length,0);
+  document.getElementById('total-done').textContent = TOTAL;
+  document.getElementById('total-cat').textContent = DATA.length;
+  setTimeout(()=>{ document.getElementById('progress-fill').style.width = '100%'; }, 100);
+}
+
+function toggleSection(header){ header.nextElementSibling.classList.toggle('hidden'); header.classList.toggle('collapsed'); }
+let activeFilter = null;
+function doSearch(){ renderSections(document.getElementById('search').value, activeFilter); }
+function toggleFilter(type){
+  const btn = document.getElementById('filter-'+type);
+  if (activeFilter === type){ activeFilter = null; document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); }
+  else { activeFilter = type; document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }
+  renderSections(document.getElementById('search').value, activeFilter);
+}
+renderSections();
+</script>
+</body>
+</html>
